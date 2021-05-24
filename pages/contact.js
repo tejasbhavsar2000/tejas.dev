@@ -2,34 +2,20 @@ import Head from 'next/head'
 
 import Nav from '@components/Nav'
 import Header from '@components/Header'
-import Card from '@components/Card'
 import Footer from '@components/Footer'
+import ContactForm from '@components/ContactForm'
 
-export default function Home({ items }) {
+export default function Contact() {
   return (
     <div className="container">
       <Head>
-        <title>My Portfolio Example</title>
+        <title>My Portfolio | Contact</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-
       <main>
-        <Header text="Welcome to my portfolio!" />
-
-        <div className="cards">
-          {items?.length &&
-            items.map((i) => {
-              return (
-                <Card
-                  key={i.title}
-                  title={i.title}
-                  picture={i.image}
-                  link={i.slug}
-                />
-              )
-            })}
-        </div>
+        <Header text="Contact me" />
+        <ContactForm />
       </main>
 
       <Footer />
@@ -51,13 +37,6 @@ export default function Home({ items }) {
           justify-content: center;
           align-items: center;
         }
-
-        .cards {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-        }
       `}</style>
 
       <style jsx global>{`
@@ -76,19 +55,4 @@ export default function Home({ items }) {
       `}</style>
     </div>
   )
-}
-
-export async function getStaticProps() {
-  const portfolioData = await import(`../portfolio.json`)
-
-  let slugs = []
-  portfolioData.items.map((i) => {
-    slugs.concat(i.slug)
-  })
-
-  return {
-    props: {
-      items: portfolioData.items,
-    },
-  }
 }
