@@ -1,36 +1,27 @@
 import Head from 'next/head'
-
+import Image from 'next/image'
 import Nav from '@components/Nav'
 import Header from '@components/Header'
 import Card from '@components/Card'
 import Footer from '@components/Footer'
 
-export default function Home({ items }) {
+export default function Home() {
   return (
     <div className="container">
+      <Image                          // Not working bg
+        alt="Mountains"
+        src="/background.png"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+      />
       <Head>
         <title>My Portfolio Example</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
 
-      <main>
-        <Header text="Welcome to my portfolio!" />
-
-        <div className="cards">
-          {items?.length &&
-            items.map((i) => {
-              return (
-                <Card
-                  key={i.title}
-                  title={i.title}
-                  picture={i.image}
-                  link={i.slug}
-                />
-              )
-            })}
-        </div>
-      </main>
+      
 
       <Footer />
 
@@ -60,35 +51,9 @@ export default function Home({ items }) {
         }
       `}</style>
 
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+      
     </div>
   )
 }
 
-export async function getStaticProps() {
-  const portfolioData = await import(`../portfolio.json`)
 
-  let slugs = []
-  portfolioData.items.map((i) => {
-    slugs.concat(i.slug)
-  })
-
-  return {
-    props: {
-      items: portfolioData.items,
-    },
-  }
-}
