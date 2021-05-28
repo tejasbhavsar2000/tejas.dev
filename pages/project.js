@@ -6,10 +6,9 @@ export default function project({items}){
         return(
         
         <div>
-            <Nav/>
-        <main className= {Styles.Main}>
+          <main className= {Styles.Main}>
         <Header text="Welcome to my portfolio!" />
-
+        
         <div className={Styles.cards}>
           {items?.length &&
             items.map((i) => {
@@ -23,6 +22,7 @@ export default function project({items}){
               )
             })}
         </div>
+
       </main>
       </div>
       

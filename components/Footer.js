@@ -3,8 +3,7 @@ export default function Footer() {
     <>
       <footer>
         Made with{' '}
-        <img src="/netliheart.svg" alt="Netlify Logo" className="logo" /> for
-        you
+        <img src="/netliheart.svg" alt="Netlify Logo" className="logo" /> Next.js
       </footer>
       <style jsx>{`
         footer {
@@ -14,6 +13,7 @@ export default function Footer() {
           display: flex;
           justify-content: center;
           align-items: center;
+          align-self: flex-end;
         }
 
         .logo {

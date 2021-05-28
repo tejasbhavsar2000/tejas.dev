@@ -12,7 +12,6 @@ export default function Contact() {
         <title>My Portfolio | Contact</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Nav />
       <main>
         <Header text="Contact me" />
         <ContactForm />
@@ -39,20 +38,7 @@ export default function Contact() {
         }
       `}</style>
 
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
 
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </div>
   )
 }
