@@ -3,6 +3,9 @@ import Styles from '@styles/Nav.module.css'
 export default function Nav() {
   return (
   <nav className={Styles.nav} role="navigation" aria-label="main navigation">
+      <Link href="/">
+        <a>Home</a>
+      </Link>
       <Link href="/project">
         <a>Projects</a>
       </Link>
