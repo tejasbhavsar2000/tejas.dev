@@ -2,8 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Header from '@components/Header'
 import Card from '@components/Card'
-import Footer from '@components/Footer'
-import Background from '@components/Background'
+import Footer from '@components/Footer' 
 import Style from '@styles/index.module.css'
 
 export default function Home() {

@@ -17,4 +17,7 @@
 }
 .nav a:hover {
   text-decoration: underline;
+  background: linear-gradient(to right, #9548d4 0%, #5293cf 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
