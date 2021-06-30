@@ -1,19 +1,27 @@
 import Link from 'next/link'
 import Styles from '@styles/Nav.module.css'
 import Toogle from '@components/Toggle'
+import { motion } from 'framer-motion'
 export default function Nav() {
   return (
-  <nav className={Styles.nav} role="navigation" aria-label="main navigation">
-      <Toogle/>
+    <nav className={Styles.nav} role="navigation" aria-label="main navigation">
+
       <Link href="/">
-        <a>Home</a>
+        <motion.div whileHover={{scale:1}} whileTap={{scale:0.80}}>
+          <a>Home</a>
+        </motion.div>
       </Link>
       <Link href="/project">
-        <a>Projects</a>
+        <motion.div whileHover={{scale:1}} whileTap={{scale:0.80}}>
+          <a>Projects</a>
+        </motion.div>
       </Link>
       <Link href="/contact">
-        <a>Contact</a>
+        <motion.div whileHover={{scale:1}} whileTap={{scale:0.80}}>
+          <a>Contact</a>
+        </motion.div>
       </Link>
+      <Toogle />
     </nav>
   )
 }

@@ -2,12 +2,13 @@ import Header from '@components/Header'
 import Card from '@components/Card'
 import Styles from '@styles/Projects.module.css'
 import Nav from '@components/Nav'
+import { motion } from 'framer-motion'
 export default function project({items}){
         return(
         
-        <div>
+        <motion.div exit={{ opacity: 0 }} initial={{opacity:0}} animate={{opacity:1}}>
           <main className= {Styles.Main}>
-        <Header text="Welcome to my portfolio!" />
+        <Header text="Some of My Projects ⚒️" />
         
         <div className={Styles.cards}>
           {items?.length &&
@@ -21,10 +22,10 @@ export default function project({items}){
                 />
               )
             })}
-        </div>
+          </div>
 
-      </main>
-      </div>
+        </main>
+        </motion.div>
       
     )
 }

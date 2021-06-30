@@ -1,11 +1,13 @@
-.layout{
-    display: grid;
-    grid-template-columns: 1fr
+.layout {
+  display: grid;
+  grid-template-columns:
     1fr
+    min(650px, calc(100% - 2rem))
     1fr;
-    gap: 1rem;
-	padding: 0;
+  gap: 1rem;
+  padding: 0;
+  margin: 0 0;
 }
-.layout > *{
-    grid-column: 2;
+.layout > * {
+  grid-column: 2;
 }
