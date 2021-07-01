@@ -6,10 +6,10 @@ import { motion } from 'framer-motion'
 export default function project({items}){
         return(
         
-        <motion.div exit={{ opacity: 0 }} initial={{opacity:0}} animate={{opacity:1}}>
-          <main className= {Styles.Main}>
+        <motion.div className= {Styles.Main} exit={{ opacity: 0 }} initial={{opacity:0}} animate={{opacity:1}}>
+        <main>
         <Header text="Some of My Projects ⚒️" />
-        
+        </main>
         <div className={Styles.cards}>
           {items?.length &&
             items.map((i) => {
@@ -24,7 +24,7 @@ export default function project({items}){
             })}
           </div>
 
-        </main>
+        
         </motion.div>
       
     )

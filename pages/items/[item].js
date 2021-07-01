@@ -12,8 +12,7 @@ export default function Item({ title, description, image }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Nav />
-
+    
       <main>
         <Header text={title} />
         <p>{description}</p>
