@@ -9,6 +9,7 @@ export default function Footer() {
         footer {
           width: 100%;
           height: 100px;
+          font-size: 12px;
           border-top: 1px solid #eaeaea;
           display: flex;
           justify-content: center;

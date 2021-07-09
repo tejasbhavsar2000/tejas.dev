@@ -8,17 +8,17 @@ export default function Nav() {
 
       <Link href="/">
         <motion.div whileHover={{cursor:'pointer',scale:1}} whileTap={{scale:0.80}}>
-          <a>Home</a>
+          <a>home</a>
         </motion.div>
       </Link>
-      <Link href="/project">
+      <Link href="/blogs">
         <motion.div whileHover={{cursor:'pointer',scale:1}} whileTap={{scale:0.80}}>
-          <a>Projects</a>
+          <a>blogs</a>
         </motion.div>
       </Link>
-      <Link href="/contact">
+      <Link href="/about">
         <motion.div whileHover={{cursor:'pointer',scale:1}} whileTap={{scale:0.80}}>
-          <a>Contact</a>
+          <a>about</a>
         </motion.div>
       </Link>
       <Toogle />
