@@ -9,10 +9,13 @@
     "export": "next export"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "10.2.3",
+    "raw-loader": "^4.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-markdown": "^6.0.2"
+    "react-markdown": "^6.0.2",
+    "remark-loader": "^4.0.0"
   },
   "devDependencies": {
     "framer-motion": "^4.1.17"

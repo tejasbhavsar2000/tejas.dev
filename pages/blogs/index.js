@@ -1,6 +1,7 @@
 import Card from "@components/Card";
 import Styles from "@styles/Blogs.module.css";
 import { motion } from "framer-motion";
+import { getAllBlogsName } from "lib/resolveBlogsPath";
 export default function blogs({ items }) {
   return (
     <motion.main
@@ -25,20 +26,17 @@ export default function blogs({ items }) {
       <div className={Styles.cards}>
         {items?.length &&
           items.map((i) => {
-            return (
-              <Card key={i.title} title={i.title} date={i.date} link={i.slug} />
-            );
+            return <Card key={i} title={i.replace(".md", "")} link={i} />;
           })}
       </div>
     </motion.main>
   );
 }
 export async function getStaticProps() {
-  const portfolioData = await import(`../../Blogs.json`);
-
+  const allBlogs = getAllBlogsName();
   return {
     props: {
-      items: portfolioData.blogs,
+      items: allBlogs,
     },
   };
 }

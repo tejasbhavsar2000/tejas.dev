@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import ReactMarkdownComponents, {
   ReactMarkdownTransformImageUri,
 } from "utils/ReactMarkdownComponents";
+import getBlogData, { getAllPaths } from "lib/resolveBlogsPath";
 
 export default function blog({ content }) {
   return (
@@ -12,13 +13,20 @@ export default function blog({ content }) {
     ></ReactMarkdown>
   );
 }
-export async function getStaticProps() {
-  const content = await fetch("").then((response) => response.text());
 
+export async function getStaticProps({ ...ctx }) {
+  const content = getBlogData(ctx.params.id);
   return {
     props: {
       content,
     },
-    revalidate: 1,
+  };
+}
+
+export async function getStaticPaths() {
+  let paths = getAllPaths();
+  return {
+    paths,
+    fallback: false,
   };
 }
