@@ -1,10 +1,5 @@
 import Head from "next/head";
-
-import Nav from "@components/Nav";
-import Header from "@components/Header";
 import { motion } from "framer-motion";
-import Footer from "@components/Footer";
-import ContactForm from "@components/ContactForm";
 
 export default function Contact() {
   return (
