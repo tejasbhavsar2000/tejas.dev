@@ -10,20 +10,17 @@ export function slugifyString(string) {
     .toLowerCase();
 }
 
-function isRepoImage(src) {
-  return src.match(/(^https:\/\/raw.githubusercontent.com)+/) !== null;
-}
-
 export function ReactMarkdownTransformImageUri(src) {
-  const match = src.match(/(^https:\/\/)+/g);
-  return match
-    ? src
-    : `https://raw.githubusercontent.com/alphacentauri82/scoutx/main/${src}`;
+  return `/blog/${src}`;
 }
 
 export default function ReactMarkdownComponents() {
   return {
-    h1: ({ children }) => <h1 className={Styles.content__h1}>{children}</h1>,
+    h1: ({ children }) => (
+      <span>
+        <h1 className={Styles.content__h1}>{children}</h1>
+      </span>
+    ),
     h2: ({ children }) => (
       <h2 className={Styles.content__h2} id={`${slugifyString(children[0])}`}>
         {children}
@@ -50,5 +47,8 @@ export default function ReactMarkdownComponents() {
       <code className={Styles.content__code}>{children}</code>
     ),
     hr: () => <hr className={Styles.content__hr} />,
+    img: ({ src, alt }) => {
+      return <img src={src} alt={alt} />;
+    },
   };
 }

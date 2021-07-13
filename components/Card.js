@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Card({ title, link, date }) {
   return (
     <div>
-      <Link href={`/items/${link}`}>
+      <Link href={`/blogs/${link.replace(".md", "")}`}>
         <a>
           <h2 className="title">{title}</h2>
         </a>

@@ -15,7 +15,7 @@ export default function Contact() {
       className="container"
     >
       <Head>
-        <title>My Portfolio | Contact</title>
+        <title>About</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
@@ -23,25 +23,17 @@ export default function Contact() {
       </main>
 
       <style jsx>{`
-        .container {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
         h1 {
           color: var(--color-secondary);
           font-size: 90px;
-          padding: 20px 0px;
+          padding: 20px 0;
           margin: 0px;
         }
         main {
-          padding: 5rem 0;
+          padding: 0;
           flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
         }
       `}</style>

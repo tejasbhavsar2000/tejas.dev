@@ -11,20 +11,21 @@ export default function Home() {
       className="container"
     >
       <Head>
-        <title>My Portfolio Example</title>
+        <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={Style.home}>
+      <main className={Style.home}>
         <h1>Hey, I'm Tejas!👋</h1>
         <p className={Style.item2}>
-          Focused and enthusiastic developer with a keen interest in software
-          development and artificial intelligence. By comprehensive exposure to
-          the underlying concepts and applying them vividly to various projects,
-          my love for these domains came into being. I am a passionate
-          individual who thrives to build and apply algorithms to solve
-          real-world industry problems.{" "}
+          I'm a developer from India who is in love with Frontend Development
+          using React. I have worked with languages like Java, Python,
+          Javascript, and Frameworks like Next.js.{" "}
         </p>
-      </div>
+        <p className={Style.item2}>
+          I'm currently looking for the role as <span> Frontend Developer</span>
+          .{" "}
+        </p>
+      </main>
 
       <style jsx>{`
         .container {

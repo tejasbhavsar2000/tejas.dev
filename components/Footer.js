@@ -1,15 +1,14 @@
 export default function Footer() {
   return (
-    <>
-      <footer>
-        Made with{' '}
-        <img src="/netliheart.svg" alt="Netlify Logo" className="logo" /> Next.js
-      </footer>
+    <footer>
+      Inspired By&nbsp;<a href="https://sreetamdas.com">Sreetam Das</a>
+      &nbsp;&bull;&nbsp;Made with&nbsp;
+      <a href="https://nextjs.org">Next.js</a>
       <style jsx>{`
         footer {
           width: 100%;
           height: 100px;
-          font-size: 12px;
+
           border-top: 1px solid #eaeaea;
           display: flex;
           justify-content: center;
@@ -17,11 +16,10 @@ export default function Footer() {
           align-self: flex-end;
         }
 
-        .logo {
-          height: 1em;
-          margin: 5px;
+        a {
+          text-decoration: none;
         }
       `}</style>
-    </>
-  )
+    </footer>
+  );
 }

@@ -20,13 +20,22 @@ body {
   color: var(--color-primary-light);
   line-height: 1.5;
 }
+  
+
 h1 {
   font-family: var(--font-family-heading);
 }
-
-::-webkit-scrollbar {
-  width: 0px;
+main {
+  min-height: 70vh;
 }
+html::-webkit-scrollbar {
+  display: none;
+}
+span {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
 }

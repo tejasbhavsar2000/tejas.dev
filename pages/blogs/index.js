@@ -2,6 +2,7 @@ import Card from "@components/Card";
 import Styles from "@styles/Blogs.module.css";
 import { motion } from "framer-motion";
 import { getAllBlogsName } from "lib/resolveBlogsPath";
+import Head from "next/head";
 export default function blogs({ items }) {
   return (
     <motion.main
@@ -10,6 +11,9 @@ export default function blogs({ items }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
+      <Head>
+        <title>Blogs</title>
+      </Head>
       <header>
         <h1
           style={{
