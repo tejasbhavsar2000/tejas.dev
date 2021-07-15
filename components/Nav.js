@@ -18,64 +18,58 @@ export default function Nav() {
             whileHover={{ cursor: "pointer", scale: 1 }}
             whileTap={{ scale: 0.8 }}
           >
-            <a>
-              <Home />
-            </a>
+            <Home />
           </motion.div>
         </Link>
       </div>
       <div className={Styles.nav}>
-        <Link href="/uses">
-          <motion.div
-            whileHover={{ cursor: "pointer", scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <a>uses</a>
-          </motion.div>
-        </Link>
-        <Link href="/blogs">
-          <motion.div
-            whileHover={{ cursor: "pointer", scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <a>blogs</a>
-          </motion.div>
-        </Link>
-        <Link href="/about">
-          <motion.div
-            whileHover={{ cursor: "pointer", scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <a>about</a>
-          </motion.div>
-        </Link>
-        <Link href="https://github.com/tejasbhavsar2000">
-          <motion.div
-            whileHover={{ cursor: "pointer", scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <a>
-              <GitHubIcon />
-            </a>
-          </motion.div>
-        </Link>
-        <Link href="https://twitter.com/_tejas_bhavsar">
-          <motion.div
-            whileHover={{ cursor: "pointer", scale: 1 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <a>
-              <TwitterIcon />
-            </a>
-          </motion.div>
-        </Link>
         <motion.div
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
-          <a>
-            <Toogle />
-          </a>
+          <Link href="/uses">uses</Link>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          <Link href="/blogs">blogs</Link>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          <Link href="/about">about</Link>
+        </motion.div>
+
+        <motion.div
+          className={Styles.svg}
+          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          <Link href="https://github.com/tejasbhavsar2000">
+            <GitHubIcon />
+          </Link>
+        </motion.div>
+
+        <motion.div
+          className={Styles.svg}
+          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          <Link href="https://twitter.com/_tejas_bhavsar">
+            <TwitterIcon />
+          </Link>
+        </motion.div>
+
+        <motion.div
+          className={Styles.svg}
+          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileTap={{ scale: 0.8 }}
+        >
+          <Toogle />
         </motion.div>
       </div>
     </nav>

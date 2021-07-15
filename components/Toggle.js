@@ -13,11 +13,23 @@ export default function Toogle() {
   const CurrentMode = () => {
     if (currentMode == "white")
       return (
-        <Image src="/dark_mode.svg" height={30} width={30} onClick={toogle} />
+        <Image
+          src="/dark_mode.svg"
+          height={30}
+          width={30}
+          onClick={toogle}
+          alt="darkmode"
+        />
       );
     else
       return (
-        <Image src="/light_mode.svg" height={30} width={30} onClick={toogle} />
+        <Image
+          src="/light_mode.svg"
+          height={30}
+          width={30}
+          onClick={toogle}
+          alt="lightmode"
+        />
       );
   };
   const toogle = () => {

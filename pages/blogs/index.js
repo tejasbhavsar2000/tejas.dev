@@ -13,6 +13,7 @@ export default function blogs({ items }) {
     >
       <Head>
         <title>Blogs</title>
+        <meta name="description" content="Put your description here."></meta>
       </Head>
       <header>
         <h1

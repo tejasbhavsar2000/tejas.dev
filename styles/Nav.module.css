@@ -18,6 +18,9 @@
   color: var(--color-primary);
   text-decoration: none;
 }
+.nav svg {
+  margin-right: 20px;
+}
 .nav a:hover {
   background: rgb(157 134 233);
   -webkit-background-clip: text;

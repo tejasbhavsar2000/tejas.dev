@@ -13,6 +13,7 @@ export default function Home() {
       <Head>
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Put your description here."></meta>
       </Head>
       <main className={Style.home}>
         <h1>Hey, I'm Tejas!👋</h1>

@@ -11,6 +11,7 @@ export default function Contact() {
       <Head>
         <title>About</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Put your description here."></meta>
       </Head>
       <main>
         <h1>/about</h1>
