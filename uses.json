@@ -1,0 +1,34 @@
+{
+  "devices": [
+    {
+      "emoji": "💻",
+      "name": "MSI GE73VR 7RF Raider",
+      "link": "https://www.msi.com/Laptop/GE73VR-7RF-Raider/Specification"
+    },
+    {
+      "emoji": "🖥️",
+      "name": "LG UltraGear",
+      "link": "https://www.lg.com/in/monitors/lg-27GN750-B"
+    },
+    {
+      "emoji": "🖱️",
+      "name": "Steelseries Rival 100",
+      "link": "https://www.amazon.in/SteelSeries-Rival-62339-Optical-Gaming/dp/B015WKY19I/ref=sr_1_1?dchild=1&keywords=steelseries+rival+100&qid=1626354469&s=computers&sr=1-1"
+    },
+    {
+      "emoji": "⌨️",
+      "name": "RedGear L-Claw",
+      "link": ""
+    },
+    {
+      "emoji": "📱",
+      "name": "ROG Phone II",
+      "link": "https://rog.asus.com/in/phones/rog-phone-ii-model/"
+    },
+    {
+      "emoji": "🎧",
+      "name": "HyperX Stinger",
+      "link": "https://www.hyperxgaming.com/en/headsets/cloud-stinger-gaming-headset"
+    }
+  ]
+}

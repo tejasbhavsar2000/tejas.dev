@@ -19,7 +19,7 @@ export default function Home() {
         <p className={Style.item2}>
           I'm a developer from India who is in love with Frontend Development
           using React. I have worked with languages like Java, Python,
-          Javascript, and Frameworks like Next.js.{" "}
+          Javascript, and Frameworks like Next.js, Nest.js.{" "}
         </p>
         <p className={Style.item2}>
           I'm currently looking for the role as <span> Frontend Developer</span>
@@ -31,7 +31,9 @@ export default function Home() {
         .container {
           display: flex;
           flex-direction: column;
-          align-items: center;
+        }
+        h1 {
+          align-self: center;
         }
       `}</style>
     </motion.div>

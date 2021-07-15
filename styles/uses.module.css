@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.main h1 {
+  align-self: center;
+  color: var(--color-secondary);
+  font-size: 90px;
+  padding: 20px 0;
+  margin: 0px;
+}
+.main h2 {
+  font-weight: bold;
+}
+
+.li {
+  margin-left: 12px;
+}
+.li li {
+  margin: 5px;
+}

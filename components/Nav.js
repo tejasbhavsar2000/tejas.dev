@@ -25,6 +25,14 @@ export default function Nav() {
         </Link>
       </div>
       <div className={Styles.nav}>
+        <Link href="/uses">
+          <motion.div
+            whileHover={{ cursor: "pointer", scale: 1 }}
+            whileTap={{ scale: 0.8 }}
+          >
+            <a>uses</a>
+          </motion.div>
+        </Link>
         <Link href="/blogs">
           <motion.div
             whileHover={{ cursor: "pointer", scale: 1 }}
