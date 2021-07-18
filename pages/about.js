@@ -1,5 +1,7 @@
 import Head from "next/head";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { LinkedIn, GitHub, Twitter, Mail } from "@material-ui/icons/";
 export default function Contact() {
   return (
     <motion.div
@@ -18,7 +20,7 @@ export default function Contact() {
         <h2>Hello !</h2>
         <p>
           My name is Tejas Bhavsar and I'm a Fullstack Developer (more focused
-          towards Frontend development.{" "}
+          towards Frontend development).{" "}
         </p>
         <p>
           I'm a self-taught developer with Degree in Computer Engineering. I've
@@ -40,7 +42,33 @@ export default function Contact() {
               Apex legends esports scene
             </a>
           </span>
-          {".  "}
+          {".  "}I also enjoy playing soccer and like to read about different
+          Mythologies.
+        </p>
+        <p>You can find me on the following platforms:</p>
+        <div>
+          <a href="https://www.linkedin.com/in/tejas-bhavsar-8a425b188/">
+            <LinkedIn cursor="pointer" />
+          </a>
+          <a href="https://github.com/tejasbhavsar2000">
+            <GitHub cursor="pointer" />
+          </a>
+          <a href="https://twitter.com/_tejas_bhavsar">
+            <Twitter cursor="pointer" />
+          </a>
+          <a href="mailto: tejasb.dev@gmail.com">
+            <Mail cursor="pointer" />
+          </a>
+        </div>
+        <p>
+          and if you are interested , you can take a look at my{" "}
+          <a href="https://drive.google.com/file/d/1KCguIZDSsOyj8b1aKIFovvqWxJpmIbJ7/view?usp=sharing">
+            resume.
+          </a>
+        </p>
+        <p>
+          If you would like to know what technologies i have worked with, here's
+          the <Link href="/stack">/stack</Link>.
         </p>
       </main>
 
@@ -51,6 +79,13 @@ export default function Contact() {
           padding: 20px 0;
           margin: 0px;
           align-self: center;
+        }
+        div {
+          display: flex;
+          justify-content: center;
+        }
+        div a {
+          margin: 0 4px;
         }
 
         main {

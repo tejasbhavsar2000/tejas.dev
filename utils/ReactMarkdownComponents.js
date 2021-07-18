@@ -48,7 +48,7 @@ export default function ReactMarkdownComponents() {
     ),
     hr: () => <hr className={Styles.content__hr} />,
     img: ({ src, alt }) => {
-      return <img src={src} alt={alt} />;
+      return <img src={src} alt={alt} className={Styles.content__img} />;
     },
   };
 }

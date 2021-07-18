@@ -1,0 +1,49 @@
+{
+  "stacks": [
+    {
+      "name": "React",
+      "link": "https://reactjs.org/"
+    },
+    {
+      "name": "Next.JS",
+      "link": "https://nextjs.org/"
+    },
+
+    {
+      "name": "Node.JS",
+      "link": "https://nodejs.org/en/"
+    },
+    {
+      "name": "Express",
+      "link": "https://expressjs.com/"
+    },
+    {
+      "name": "Nest.JS",
+      "link": "https://nestjs.com/"
+    },
+    {
+      "name": "TypeORM",
+      "link": "https://typeorm.io/#/"
+    },
+    {
+      "name": "GraphQL",
+      "link": "https://graphql.org/"
+    },
+    {
+      "name": "Material UI",
+      "link": "https://material-ui.com/"
+    },
+    {
+      "name": "Framer-Motion",
+      "link": "https://www.framer.com/motion/"
+    },
+    {
+      "name": "PostgresQL",
+      "link": "https://www.postgresql.org/"
+    },
+    {
+      "name": "Firebase",
+      "link": "https://firebase.google.com/"
+    }
+  ]
+}

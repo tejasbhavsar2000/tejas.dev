@@ -23,6 +23,7 @@ export default function Card({ title, link, date }) {
             font-weight: bold;
           }
           div:hover {
+            cursor: pointer;
             background-image: linear-gradient(
               90deg,
               rgb(157, 134, 233) 0%,

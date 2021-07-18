@@ -29,10 +29,16 @@ export default function blogs({ items }) {
       </header>
 
       <div className={Styles.cards}>
-        {items?.length &&
-          items.map((i) => {
-            return <Card key={i} title={i.replace(".md", "")} link={i} />;
-          })}
+        <ul>
+          {items?.length &&
+            items.map((i) => {
+              return (
+                <li key={i}>
+                  <Card key={i} title={i.replace(".md", "")} link={i} />{" "}
+                </li>
+              );
+            })}
+        </ul>
       </div>
     </motion.main>
   );
