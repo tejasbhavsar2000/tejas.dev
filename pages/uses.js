@@ -12,7 +12,7 @@ export default function uses({ Devices }) {
     >
       <Head>
         <title>Uses</title>
-        <meta name="description" content="Put your description here."></meta>
+        <meta name="description" content="Things I use."></meta>
       </Head>
       <h1>/uses</h1>
       <h2>Equipments:</h2>

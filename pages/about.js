@@ -13,7 +13,10 @@ export default function Contact() {
       <Head>
         <title>About</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Put your description here."></meta>
+        <meta
+          name="description"
+          content="My name is Tejas Bhavsar and I'm a Fullstack Developer"
+        ></meta>
       </Head>
       <main>
         <h1>/about</h1>

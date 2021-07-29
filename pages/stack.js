@@ -12,7 +12,7 @@ export default function uses({ stacks }) {
     >
       <Head>
         <title>/stack</title>
-        <meta name="description" content="Put your description here."></meta>
+        <meta name="description" content="My Tech-Stack"></meta>
       </Head>
       <h1>/stack</h1>
       <h3>A list of technologies i have worked with:</h3>
