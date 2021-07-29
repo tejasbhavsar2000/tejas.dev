@@ -1,7 +1,8 @@
 # [tejas-dev.vercel.app](tejas-dev.vercel.app)
 
-![image](https://user-images.githubusercontent.com/69855413/125905479-4f275740-7b70-4d08-9826-b1b97e740420.png)
-Almost Perfect Lighthouse Score!
+![image](https://user-images.githubusercontent.com/69855413/127091107-d0259944-2fe6-4061-8b05-2152fa3efb2f.png)
+
+Perfect Lighthouse Score!
 
 ## Getting Started
 Install Dependencies:
