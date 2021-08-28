@@ -18,9 +18,8 @@ const Project = ({ name, tags, link }) => {
         </ul>
       </div>
       <video
-        controls
-        playsinline
-        autoplay
+        playsInline
+        autoPlay
         muted
         loop
         src={`projects/${name}.webm`}
