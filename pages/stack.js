@@ -11,7 +11,7 @@ export default function uses({ stacks }) {
       className={Styles.main}
     >
       <Head>
-        <title>/stack</title>
+        <title>Stack</title>
         <meta name="description" content="My Tech-Stack"></meta>
       </Head>
       <h1>/stack</h1>

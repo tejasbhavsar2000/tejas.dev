@@ -27,7 +27,7 @@ export default function Nav() {
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
-          <Link href="/uses">uses</Link>
+          <Link href="/projects">projects</Link>
         </motion.div>
 
         <motion.div

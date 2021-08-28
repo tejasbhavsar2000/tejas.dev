@@ -15,8 +15,8 @@ export default function Toogle() {
       return (
         <Image
           src="/dark_mode.svg"
-          height={30}
-          width={30}
+          height="30"
+          width="30"
           onClick={toogle}
           alt="darkmode"
         />
@@ -25,8 +25,9 @@ export default function Toogle() {
       return (
         <Image
           src="/light_mode.svg"
-          height={30}
-          width={30}
+          height="30"
+          width="30"
+          layout="fixed"
           onClick={toogle}
           alt="lightmode"
         />

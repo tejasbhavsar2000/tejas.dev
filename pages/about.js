@@ -73,6 +73,9 @@ export default function Contact() {
           If you would like to know what technologies i have worked with, here's
           the <Link href="/stack">/stack</Link>.
         </p>
+        <p>
+          Things I use : <Link href="/uses">/uses</Link>.
+        </p>
       </main>
 
       <style jsx>{`

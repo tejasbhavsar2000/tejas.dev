@@ -1,5 +1,10 @@
 import Styles from "@styles/markdown.module.css";
-
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-jsx";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
+import { useEffect } from "react";
 export function slugifyString(string) {
   return string
     .replace(/\s+/g, "-")
@@ -15,6 +20,9 @@ export function ReactMarkdownTransformImageUri(src) {
 }
 
 export default function ReactMarkdownComponents() {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
   return {
     h1: ({ children }) => (
       <span>
@@ -41,7 +49,9 @@ export default function ReactMarkdownComponents() {
     ul: ({ children }) => <ul className={Styles.content__ul}>{children}</ul>,
     li: ({ children }) => <li className={Styles.content__li}>{children}</li>,
     pre: ({ children }) => (
-      <pre className={Styles.content__pre}>{children}</pre>
+      <pre className={`language-jsx line-numbers  ${Styles.content__pre}`}>
+        {children}
+      </pre>
     ),
     code: ({ children }) => (
       <code className={Styles.content__code}>{children}</code>
