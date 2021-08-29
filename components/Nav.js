@@ -15,6 +15,7 @@ export default function Nav() {
       <div>
         <Link href="/">
           <motion.div
+            className={Styles.home}
             whileHover={{ cursor: "pointer", scale: 1 }}
             whileTap={{ scale: 0.8 }}
           >
@@ -46,6 +47,7 @@ export default function Nav() {
 
         <motion.div
           className={Styles.svg}
+          id="github"
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
@@ -55,6 +57,7 @@ export default function Nav() {
         </motion.div>
 
         <motion.div
+          id="twitter"
           className={Styles.svg}
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
@@ -65,7 +68,7 @@ export default function Nav() {
         </motion.div>
 
         <motion.div
-          className={Styles.svg}
+          className={Styles.toggle}
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >

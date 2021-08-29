@@ -20,10 +20,27 @@
   text-decoration: none;
 }
 .nav svg {
+  display: flex;
+  align-items: center;
   margin-right: 20px;
+}
+.home {
+  display: flex;
+  align-items: center;
+}
+.toggle {
+  display: flex;
+  align-items: center;
 }
 .nav a:hover {
   background: rgb(157 134 233);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 500px) {
+  .nav svg {
+    display: none;
+    visibility: hidden;
+  }
 }
