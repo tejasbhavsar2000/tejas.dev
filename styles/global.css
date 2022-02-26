@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap");
 :root {
-  --bg-dark: black;
+  --bg-dark: rgb(56, 52, 52);
   --color-primary-light: white;
-  --color-secondary: rgb(157 134 233);
+  --color-secondary: rgb(228, 146, 108);
   --font-family-main: "Karla", sans-serif;
   --font-family-heading: "Rubik", sans-serif;
 }

@@ -11,7 +11,7 @@ export default function Toogle() {
     return rs.getPropertyValue(name);
   }
   const CurrentMode = () => {
-    if (currentMode == "white")
+    if (currentMode == "rgb(243, 242, 242)")
       return (
         <Image
           src="/dark_mode.svg"
@@ -36,7 +36,8 @@ export default function Toogle() {
   const toogle = () => {
     const mode = myFunction_get("--bg-dark");
     const r = document.querySelector(":root");
-    const scheme = "white" == mode ? "black" : "white";
+    const scheme =
+      "rgb(243, 242, 242)" == mode ? "rgb(56, 52, 52)" : "rgb(243, 242, 242)";
     setCurrentMode(scheme);
     r.style.setProperty("--bg-dark", scheme);
     r.style.setProperty(

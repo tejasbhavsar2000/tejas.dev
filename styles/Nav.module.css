@@ -34,7 +34,7 @@
   align-items: center;
 }
 .nav a:hover {
-  background: rgb(157 134 233);
+  background: var(--color-secondary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
