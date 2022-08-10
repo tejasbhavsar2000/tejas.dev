@@ -11,6 +11,7 @@ export default function Footer() {
           font-size: 15px;
           border-top: 1px solid #eaeaea;
           display: flex;
+          z-index: 999;
           justify-content: center;
           align-items: center;
           align-self: flex-end;

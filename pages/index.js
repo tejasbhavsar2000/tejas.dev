@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
 import Style from "@styles/index.module.css";
-
+import Background from "@components/Background";
 export default function Home() {
   return (
     <motion.div
@@ -10,6 +10,8 @@ export default function Home() {
       animate={{ opacity: 1 }}
       className="container"
     >
+      <Background />
+
       <Head>
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />

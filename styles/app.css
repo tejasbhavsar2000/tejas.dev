@@ -1,4 +1,5 @@
 .layout {
+
   display: grid;
   grid-template-columns:
     1fr
@@ -6,8 +7,10 @@
     1fr;
   gap: 1rem;
   padding: 0;
+ 
   margin: 0 0;
 }
+
 .layout > * {
   grid-column: 2;
 }
