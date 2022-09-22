@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-export default function Toogle() {
+export default function Toggle() {
   const [currentMode, setCurrentMode] = useState();
   useEffect(() => {
     setCurrentMode(myFunction_get("--bg-dark"));

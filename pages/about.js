@@ -50,9 +50,7 @@ export default function Contact() {
         </div>
         <p>
           and if you are interested , you can take a look at my{" "}
-          <a href="https://drive.google.com/file/d/1KCguIZDSsOyj8b1aKIFovvqWxJpmIbJ7/view?usp=sharing">
-            resume.
-          </a>
+          <a href="/resume.pdf">resume.</a>
         </p>
         <p>
           If you would like to know what technologies i have worked with, here's

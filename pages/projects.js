@@ -1,7 +1,8 @@
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Styles from "@styles/Projects.module.css";
 import Head from "next/head";
-import Project from "@components/Project";
+const Project = dynamic(() => import("@components/Project"));
 const projects = ({ projectProps }) => {
   return (
     <motion.main

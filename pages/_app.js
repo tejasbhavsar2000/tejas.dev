@@ -1,10 +1,11 @@
-import Nav from "@components/Nav";
+import dynamic from "next/dynamic";
+const Nav = dynamic(() => import("@components/Nav"));
 import "@styles/global.css";
 import { Fragment } from "react";
 import "@styles/app.css";
-import Footer from "@components/Footer";
+const Footer = dynamic(() => import("@components/Footer"));
 import { AnimatePresence } from "framer-motion";
-import Background from "@components/Background";
+
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   return (

@@ -1,7 +1,8 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Style from "@styles/index.module.css";
-import Background from "@components/Background";
+const Background = dynamic(() => import("@components/Background"));
 export default function Home() {
   return (
     <motion.div

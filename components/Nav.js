@@ -1,6 +1,7 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Styles from "@styles/Nav.module.css";
-import Toogle from "@components/Toggle";
+const Toggle = dynamic(() => import("@components/Toggle"));
 import { motion } from "framer-motion";
 import Home from "@material-ui/icons/HomeRounded";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -72,7 +73,7 @@ export default function Nav() {
           whileHover={{ cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
-          <Toogle />
+          <Toggle />
         </motion.div>
       </div>
     </nav>
