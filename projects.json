@@ -1,20 +1,25 @@
 {
   "projects": [
     {
-      "name": "Accio Diagon Alley",
-      "tags": ["nextjs", "framer motion", "material-ui"],
-      "link": "https://github.com/tejasbhavsar2000/accio-diagon-alley"
+      "name": "Character Controller",
+      "tags": ["vite", "three.js", "canon-es"],
+      "link": "https://tejasbhavsar2000.github.io/character-controller-example/"
+    },
+    {
+      "name": "Art By Drishti",
+      "tags": ["next.js", "tailwind"],
+      "link": "https://www.artbydrishti.com/"
     },
     {
       "name": "Block Coder",
       "tags": ["react", "react-blocky", "prismjs"],
-      "link": "https://github.com/tejasbhavsar2000/visual-blueprint-using-blockly"
+      "link": "https://block-code.vercel.app/"
     },
     {
       "name": "Discussion Forum",
       "tags": ["react", "nedb", "express"],
-      "description": "CRUD application",
       "link": "https://github.com/tejasbhavsar2000/Discussion_Forum"
     }
+    
   ]
 }

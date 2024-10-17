@@ -2,9 +2,9 @@ import Link from "next/link";
 import Styles from "@styles/Nav.module.css";
 import Toogle from "@components/Toggle";
 import { motion } from "framer-motion";
-import Home from "@material-ui/icons/HomeRounded";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import TwitterIcon from "@material-ui/icons/Twitter";
+import { Github, Twitter } from "lucide-react";
+
+import { House } from "lucide-react";
 export default function Nav() {
   return (
     <nav
@@ -19,7 +19,7 @@ export default function Nav() {
             whileHover={{ cursor: "pointer", scale: 1 }}
             whileTap={{ scale: 0.8 }}
           >
-            <Home />
+            <House />
           </motion.div>
         </Link>
       </div>
@@ -45,27 +45,29 @@ export default function Nav() {
           <Link href="/about">about</Link>
         </motion.div>
 
-        <motion.div
+        <motion.a
+          href="https://github.com/tejasbhavsar2000"
           className={Styles.svg}
           id="github"
-          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileHover={{  cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
-          <Link href="https://github.com/tejasbhavsar2000">
-            <GitHubIcon />
-          </Link>
-        </motion.div>
+          
+            <Github/>
+          
+        </motion.a>
 
-        <motion.div
+        <motion.a
           id="twitter"
+          href="https://twitter.com/_tejas_bhavsar"
           className={Styles.svg}
-          whileHover={{ cursor: "pointer", scale: 1 }}
+          whileHover={{  cursor: "pointer", scale: 1 }}
           whileTap={{ scale: 0.8 }}
         >
-          <Link href="https://twitter.com/_tejas_bhavsar">
-            <TwitterIcon />
-          </Link>
-        </motion.div>
+          
+            <Twitter/>
+          
+        </motion.a>
 
         <motion.div
           className={Styles.toggle}

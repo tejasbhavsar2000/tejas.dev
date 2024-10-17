@@ -5,20 +5,40 @@
       "link": "https://reactjs.org/"
     },
     {
-      "name": "Next.JS",
+      "name": "Next.js",
       "link": "https://nextjs.org/"
     },
-
     {
-      "name": "Node.JS",
+      "name": "TailwindCSS",
+      "link": "https://tailwindcss.com/"
+    },
+    {
+      "name": "Typescirpt",
+      "link": "https://www.typescriptlang.org/"
+    },
+    {
+      "name": "React Flow",
+      "link": "https://reactflow.dev/"
+    },
+    {
+      "name": "ShadCn",
+      "link": "https://ui.shadcn.com/"
+    },
+    {
+      "name": "Tauri",
+      "link": "https://v2.tauri.app/"
+    },
+    
+    {
+      "name": "Framer-Motion",
+      "link": "https://www.framer.com/motion/"
+    },
+    {
+      "name": "Node.js",
       "link": "https://nodejs.org/en/"
     },
     {
-      "name": "Express",
-      "link": "https://expressjs.com/"
-    },
-    {
-      "name": "Nest.JS",
+      "name": "Nest.js",
       "link": "https://nestjs.com/"
     },
     {
@@ -30,15 +50,7 @@
       "link": "https://graphql.org/"
     },
     {
-      "name": "Material UI",
-      "link": "https://material-ui.com/"
-    },
-    {
-      "name": "Framer-Motion",
-      "link": "https://www.framer.com/motion/"
-    },
-    {
-      "name": "PostgresQL",
+      "name": "PostgreSQL",
       "link": "https://www.postgresql.org/"
     },
     {

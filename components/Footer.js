@@ -1,14 +1,13 @@
 export default function Footer() {
   return (
-    <footer>
+    <footer >
       Made with&nbsp;
-      <a href="https://nextjs.org">Next.js</a>&nbsp;&bull;&nbsp; Inspired
-      By&nbsp;<a href="https://sreetamdas.com">Sreetam Das</a>
+      <a href="https://nextjs.org">Next.js</a>
       <style jsx>{`
         footer {
           width: 100%;
-          height: 100px;
-          font-size: 15px;
+          padding : 1rem;
+          font-size: 1.1rem;
           border-top: 1px solid #eaeaea;
           display: flex;
           z-index: 999;

@@ -16,14 +16,7 @@ export default function blogs({ items }) {
         <meta name="description" content="Written Blogs"></meta>
       </Head>
       <header>
-        <h1
-          style={{
-            color: "var(--color-secondary)",
-            fontSize: "90px",
-            padding: "20px 0",
-            margin: "0 0",
-          }}
-        >
+        <h1>
           /blog
         </h1>
       </header>

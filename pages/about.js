@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LinkedIn, GitHub, Twitter, Mail } from "@material-ui/icons/";
+import { Linkedin, Github, Twitter, Mail } from "lucide-react";
+
 export default function Contact() {
   return (
     <motion.div
@@ -36,10 +37,10 @@ export default function Contact() {
         <p>You can find me on the following platforms:</p>
         <div>
           <a href="https://www.linkedin.com/in/tejas-bhavsar-8a425b188/">
-            <LinkedIn cursor="pointer" />
+            <Linkedin cursor="pointer" />
           </a>
           <a href="https://github.com/tejasbhavsar2000">
-            <GitHub cursor="pointer" />
+            <Github cursor="pointer" />
           </a>
           <a href="https://twitter.com/_tejas_bhavsar">
             <Twitter cursor="pointer" />

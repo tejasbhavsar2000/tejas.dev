@@ -2,6 +2,7 @@
   position: sticky;
   top: 0px;
   z-index: 999;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,10 +24,12 @@
 .nav svg {
   display: flex;
   align-items: center;
-  margin-right: 20px;
+  justify-content: center;
+  margin: 0 !important;
 }
 .home {
   display: flex;
+  color: white;
   align-items: center;
 }
 .toggle {
@@ -42,6 +45,15 @@
 @media only screen and (max-width: 500px) {
   .nav svg {
     display: none;
-    visibility: hidden;
+  }
+  .navlayout {
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-dark);
   }
 }

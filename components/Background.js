@@ -33,7 +33,7 @@ const Mesh = () => {
     plain.smooth = 500;
     plain.peak = 60;
     const vertices = plain.current.geometry.attributes.position.array;
-    for (const i = 0; i <= vertices.length; i += 3) {
+    for (let i = 0; i <= vertices.length; i += 3) {
       vertices[i + 2] =
         plain.peak *
         perlin.noise(
