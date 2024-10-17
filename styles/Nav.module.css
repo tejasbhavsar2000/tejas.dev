@@ -29,7 +29,7 @@
 }
 .home {
   display: flex;
-  color: white;
+  text-decoration: none;
   align-items: center;
 }
 .toggle {
