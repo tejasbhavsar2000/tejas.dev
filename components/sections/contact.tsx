@@ -1,10 +1,27 @@
-import { ArrowUpRight, Mail } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
 import { Github, Linkedin, Twitter } from "@/components/ui/icons";
+import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/content/site";
 
 export function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard can be blocked, so fall back to the mail client.
+      window.location.href = SITE.links.email;
+    }
+  };
+
   const links = [
-    { href: SITE.links.email, icon: Mail, label: "Email", handle: SITE.email },
     {
       href: SITE.links.github,
       icon: Github,
@@ -26,43 +43,67 @@ export function Contact() {
   ];
 
   return (
-    <section
+    <Section
       id="contact"
-      className="scroll-mt-24 border-t border-border py-16 sm:py-24"
+      variant="band"
+      title="Say hi."
+      lede="I promise I reply."
     >
-      <p className="mb-4 flex items-center gap-3 font-mono text-2xs uppercase tracking-[0.16em] text-muted">
-        <span className="text-accent tnum">05</span>
-        <span className="h-px w-6 bg-border" />
-        Contact
-      </p>
-      <h2 className="max-w-[18ch] text-4xl font-semibold">
-        If any of this is your kind of problem, say hello.
-      </h2>
+      <Reveal>
+        <button
+          onClick={copyEmail}
+          className="group flex w-full items-center gap-4 border-y border-border py-7 text-left"
+        >
+          <Mail
+            size={20}
+            className="text-muted transition-colors group-hover:text-accent"
+          />
+          <span className="flex-1">
+            <span className="block text-xl font-medium transition-colors group-hover:text-accent">
+              {SITE.email}
+            </span>
+            <span className="mt-0.5 block text-sm text-muted">
+              {copied ? "Copied to your clipboard" : "Click to copy"}
+            </span>
+          </span>
+          {copied ? (
+            <Check size={18} className="shrink-0 text-accent" />
+          ) : (
+            <Copy
+              size={17}
+              className="shrink-0 text-muted transition-colors group-hover:text-accent"
+            />
+          )}
+        </button>
+      </Reveal>
 
-      <ul className="mt-10 grid gap-px overflow-hidden rounded-md border border-border bg-border sm:grid-cols-2">
-        {links.map(({ href, icon: Icon, label, handle }) => (
-          <li key={label}>
+      <ul className="divide-y divide-border border-b border-border">
+        {links.map(({ href, icon: Icon, label, handle }, i) => (
+          <Reveal as="li" key={label} delay={(i + 1) * 0.05}>
             <a
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-4 bg-bg p-5 transition-colors hover:bg-surface"
+              className="group flex items-center gap-4 py-5 transition-transform duration-300 hover:translate-x-1"
             >
-              <Icon size={17} className="text-muted transition-colors group-hover:text-accent" />
+              <Icon
+                size={18}
+                className="text-muted transition-colors group-hover:text-accent"
+              />
               <span className="flex-1">
-                <span className="block text-sm font-medium">{label}</span>
-                <span className="block font-mono text-2xs text-muted">
-                  {handle}
+                <span className="block text-base font-medium transition-colors group-hover:text-accent">
+                  {label}
                 </span>
+                <span className="block text-sm text-muted">{handle}</span>
               </span>
               <ArrowUpRight
-                size={14}
-                className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                size={15}
+                className="text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
               />
             </a>
-          </li>
+          </Reveal>
         ))}
       </ul>
-    </section>
+    </Section>
   );
 }

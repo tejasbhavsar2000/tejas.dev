@@ -26,8 +26,8 @@ export function themeInitScript() {
 var T=${tables},K=${JSON.stringify(STORAGE_KEY)},d=T.DEFAULT_THEME,t=null;
 var h=location.hash.match(/(?:^#|&)t=([^&]+)/);
 if(h){var p=decodeURIComponent(h[1]).split(".");
-if(p.length===7&&(p[0]==="light"||p[0]==="dark")&&T.ACCENTS[p[1]]&&T.FONTS[p[2]]&&T.RADII[p[3]]&&T.DENSITIES[p[4]]&&T.MOTIONS[p[5]])
-t={mode:p[0],accent:p[1],font:p[2],radius:p[3],density:p[4],motion:p[5],grid:p[6]==="1"};}
+if((p.length===6||p.length===7)&&(p[0]==="light"||p[0]==="dark")&&T.ACCENTS[p[1]]&&T.FONTS[p[2]]&&T.RADII[p[3]]&&T.DENSITIES[p[4]]&&T.MOTIONS[p[5]])
+t={mode:p[0],accent:p[1],font:p[2],radius:p[3],density:p[4],motion:p[5]};}
 if(!t){var s=localStorage.getItem(K);if(s)t=JSON.parse(s);}
 if(!t){t=Object.assign({},d,{mode:matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"});}
 var a=T.ACCENTS[t.accent]||T.ACCENTS[d.accent],f=T.FONTS[t.font]||T.FONTS[d.font],
@@ -38,7 +38,7 @@ st.setProperty("--font-display-active",f.display);st.setProperty("--font-body-ac
 st.setProperty("--font-mono-active","var(--font-jetbrains-mono)");
 st.setProperty("--radius-base",r.value);st.setProperty("--spacing",y.value);
 st.setProperty("--motion",m.value);
-e.dataset.mode=t.mode;e.dataset.motion=t.motion;e.dataset.grid=t.grid?"on":"off";
+e.dataset.mode=t.mode;e.dataset.motion=t.motion;
 st.colorScheme=t.mode;
 }catch(err){}})();`;
 }

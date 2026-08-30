@@ -29,3 +29,6 @@ yarn-error.log*
 
 # local copy of the resume; the site links to Google Drive
 Tejas Bhavsar Resume.pdf
+
+# browser smoke test screenshots
+.smoke/

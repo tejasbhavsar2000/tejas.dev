@@ -87,9 +87,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       applyTheme(next, root);
       setTheme(next);
     });
-    void transition.finished.finally(() => {
+
+    // A skipped transition is normal, for instance two quick clicks or a hidden
+    // tab, and it rejects `finished`. Handle both outcomes so the rejection is
+    // never left unhandled: `.finally()` re-throws it and surfaces an AbortError.
+    const cleanup = () => {
       delete root.dataset.wipe;
-    });
+    };
+    transition.finished.then(cleanup, cleanup);
   }, []);
 
   const set = useCallback<ThemeContextValue["set"]>(

@@ -70,7 +70,6 @@ export type ThemeState = {
   radius: RadiusId;
   density: DensityId;
   motion: MotionId;
-  grid: boolean;
 };
 
 export const DEFAULT_THEME: ThemeState = {
@@ -80,7 +79,6 @@ export const DEFAULT_THEME: ThemeState = {
   radius: "round",
   density: "normal",
   motion: "full",
-  grid: false,
 };
 
 export const STORAGE_KEY = "tejas.theme";
@@ -105,7 +103,6 @@ export function applyTheme(theme: ThemeState, root: HTMLElement) {
 
   root.dataset.mode = theme.mode;
   root.dataset.motion = theme.motion;
-  root.dataset.grid = theme.grid ? "on" : "off";
   root.style.colorScheme = theme.mode;
 }
 
@@ -117,15 +114,17 @@ export function applyTheme(theme: ThemeState, root: HTMLElement) {
 const ORDER = ["mode", "accent", "font", "radius", "density", "motion"] as const;
 
 export function encodeTheme(theme: ThemeState): string {
-  return [...ORDER.map((k) => theme[k]), theme.grid ? "1" : "0"].join(".");
+  return ORDER.map((k) => theme[k]).join(".");
 }
 
 export function decodeTheme(raw: string | null | undefined): ThemeState | null {
   if (!raw) return null;
   const parts = raw.split(".");
-  if (parts.length !== ORDER.length + 1) return null;
+  // Links shared before the layout grid was removed carry a seventh field.
+  if (parts.length !== ORDER.length && parts.length !== ORDER.length + 1)
+    return null;
 
-  const [mode, accent, font, radius, density, motion, grid] = parts;
+  const [mode, accent, font, radius, density, motion] = parts;
   const valid =
     (mode === "light" || mode === "dark") &&
     accent in ACCENTS &&
@@ -143,7 +142,6 @@ export function decodeTheme(raw: string | null | undefined): ThemeState | null {
     radius: radius as RadiusId,
     density: density as DensityId,
     motion: motion as MotionId,
-    grid: grid === "1",
   };
 }
 

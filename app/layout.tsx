@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeDock } from "@/components/theme/theme-dock";
+import { ScrollProvider } from "@/components/layout/scroll-provider";
 import { themeInitScript } from "@/lib/theme-script";
 import { SITE } from "@/content/site";
 import "./globals.css";
@@ -36,12 +37,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.role}`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name}, ${SITE.role}`,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} — ${SITE.role}`,
+    title: `${SITE.name}, ${SITE.role}`,
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
@@ -75,14 +76,16 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <a
-            href="#main"
-            className="sr-only rounded-sm bg-accent px-4 py-2 text-accent-contrast focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000]"
-          >
-            Skip to content
-          </a>
-          {children}
-          <ThemeDock />
+            <ScrollProvider>
+              <a
+                href="#main"
+                className="sr-only rounded-sm bg-accent px-4 py-2 text-accent-contrast focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000]"
+              >
+                Skip to content
+              </a>
+              {children}
+              <ThemeDock />
+            </ScrollProvider>
         </ThemeProvider>
       </body>
     </html>

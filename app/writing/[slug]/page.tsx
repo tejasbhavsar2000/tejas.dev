@@ -39,7 +39,7 @@ export default async function PostPage({
         <div className="py-10">
           <Link
             href="/#writing"
-            className="inline-flex items-center gap-2 font-mono text-2xs text-muted transition-colors hover:text-accent"
+            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
           >
             <ArrowLeft size={13} /> Back
           </Link>
@@ -53,7 +53,7 @@ export default async function PostPage({
             <p className="mt-4 text-base leading-relaxed text-muted">
               {post.description}
             </p>
-            <p className="mt-6 font-mono text-2xs text-muted tnum">
+            <p className="mt-6 text-sm text-muted tnum">
               {formatDate(post.date)} · {post.readingMinutes} min read
               {post.tags.length > 0 && ` · ${post.tags.join(", ")}`}
             </p>

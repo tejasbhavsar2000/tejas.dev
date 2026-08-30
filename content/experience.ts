@@ -17,14 +17,14 @@ export const EXPERIENCE: Role[] = [
     start: "Oct 2025",
     end: "Aug 2026",
     summary:
-      "An AI presentation platform that turns a prompt into a deck you can actually edit. I worked on the editor itself — how slides render, how you select things, and how it all survives a resize.",
+      "An AI presentation platform that turns a prompt into a deck you can actually edit. I worked on the editor itself: how slides render, how you select things, and how it all survives a resize.",
     highlights: [
       {
         text: "Replaced TLDraw's renderer and the Yoga layout engine with a DOM-first architecture, so slide content lays out with the browser instead of fighting it.",
         metric: "80% faster manual editing",
       },
       {
-        text: "Built a custom theme builder that lets users create and edit their own deck themes — colour, type, and layout tokens resolved at render time.",
+        text: "Built a custom theme builder that lets users create and edit their own deck themes, with colour, type, and layout tokens resolved at render time.",
       },
       {
         text: "Designed reusable runtime patterns for complex slide components: nested editing, precise selection, responsive resizing, and reliable export.",
@@ -42,7 +42,7 @@ export const EXPERIENCE: Role[] = [
     start: "Apr 2025",
     end: "Sep 2025",
     summary:
-      "Started on the component layer — the charts, diagrams, and data blocks that make up a slide.",
+      "Started on the component layer: the charts, diagrams, and data blocks that make up a slide.",
     highlights: [
       {
         text: "Shipped interactive data-representation components for the presentation editor.",
@@ -63,7 +63,7 @@ export const EXPERIENCE: Role[] = [
     start: "2023",
     end: "2025",
     summary:
-      "Client work, mostly where a real interface was the point — a hardware-connected inventory system and an artist's portfolio built from Figma.",
+      "Client work, mostly where a real interface was the point, such as a hardware-connected inventory system and an artist's portfolio built from Figma.",
     highlights: [
       {
         text: "Built Wire Inventory: an inventory management app talking to label printers over WebUSB and weighing machines over the Web Serial API.",
@@ -73,18 +73,5 @@ export const EXPERIENCE: Role[] = [
       },
     ],
     stack: ["Next.js", "Prisma", "Supabase", "TypeScript"],
-  },
-];
-
-export const EDUCATION = [
-  {
-    school: "SVKM's Institute of Technology, Dhule",
-    credential: "B.Tech, Computer Engineering",
-    result: "9.44 CGPA",
-  },
-  {
-    school: "K. K. Wagh Polytechnic, Nashik",
-    credential: "Diploma, Computer Technology",
-    result: "80.71%",
   },
 ];

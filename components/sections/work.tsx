@@ -1,234 +1,189 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+} from "motion/react";
 import { ArrowUpRight, Play } from "lucide-react";
-import { Github } from "@/components/ui/icons";
 import { PROJECTS, Project } from "@/content/projects";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/ui/reveal";
+import { DemoDialog } from "@/components/ui/demo-dialog";
+
+/** Demos want a keyboard and a mouse, and previews want hover. */
+function useFinePointer() {
+  const [fine, setFine] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 820px) and (pointer: fine)");
+    const sync = () => setFine(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return fine;
+}
 
 export function Work() {
-  const featured = PROJECTS.filter((p) => p.featured);
-  const rest = PROJECTS.filter((p) => !p.featured);
+  const fine = useFinePointer();
+  const [hovered, setHovered] = useState<Project | null>(null);
+  const [openProject, setOpenProject] = useState<Project | null>(null);
+  const lastTrigger = useRef<HTMLButtonElement | null>(null);
+
+  // Spring the pointer so the preview trails the cursor instead of sticking.
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const px = useSpring(x, { stiffness: 380, damping: 34, mass: 0.6 });
+  const py = useSpring(y, { stiffness: 380, damping: 34, mass: 0.6 });
+
+  // Only listen while a preview is actually on screen.
+  useEffect(() => {
+    if (!fine || !hovered) return;
+    const onMove = (e: PointerEvent) => {
+      x.set(e.clientX + 24);
+      y.set(e.clientY - 90);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [fine, hovered, x, y]);
+
+  const open = (project: Project, el: HTMLButtonElement) => {
+    lastTrigger.current = el;
+    setOpenProject(project);
+    setHovered(null);
+  };
+
+  const close = () => {
+    setOpenProject(null);
+    lastTrigger.current?.focus();
+  };
 
   return (
     <Section
       id="work"
-      index="01"
-      label="Work"
-      title="Things that are easier to use than to describe."
-      lede="So most of these are running right here on the page rather than sitting in a screenshot. Poke at them."
+      variant="band"
+      title="Made for fun."
+      lede="Some of them even work."
     >
-      <div className="space-y-6">
-        {featured.map((p) => (
-          <FeaturedCard key={p.slug} project={p} />
-        ))}
-      </div>
-
-      <ul className="mt-6 divide-y divide-border border-y border-border">
-        {rest.map((p) => (
-          <CompactRow key={p.slug} project={p} />
+      <ul
+        onPointerLeave={() => setHovered(null)}
+        className="divide-y divide-border border-y border-border"
+      >
+        {PROJECTS.map((project, i) => (
+          <Reveal as="li" key={project.slug} delay={i * 0.05}>
+            <Row
+              project={project}
+              fine={fine}
+              onHover={() => fine && setHovered(project)}
+              onOpen={open}
+            />
+          </Reveal>
         ))}
       </ul>
+
+      {/* One shared preview that follows the cursor, rather than one per row. */}
+      {fine && (
+        <AnimatePresence>
+          {hovered && hovered.media.kind !== "none" && (
+            <motion.div
+              key={hovered.slug}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.18, ease: [0.25, 1, 0.5, 1] }}
+              style={{ x: px, y: py }}
+              className="pointer-events-none fixed left-0 top-0 z-40 w-[20rem] overflow-hidden rounded-md border border-border bg-surface shadow-2xl"
+            >
+              <video
+                src={hovered.media.preview}
+                muted
+                loop
+                autoPlay
+                playsInline
+                className="aspect-[16/10] w-full object-cover"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+
+      {openProject && (
+        <DemoDialog
+          open={openProject !== null}
+          onClose={close}
+          project={openProject}
+          canEmbed={fine}
+        />
+      )}
     </Section>
   );
 }
 
-function FeaturedCard({ project }: { project: Project }) {
-  return (
-    <article className="group overflow-hidden rounded-lg border border-border bg-surface transition-colors hover:border-border-strong">
-      <div className="grid gap-0 lg:grid-cols-[1fr_1.15fr]">
-        <div className="flex flex-col justify-between gap-6 p-6 sm:p-8">
-          <div>
-            <div className="mb-3 flex items-center gap-3">
-              <h3 className="font-display text-xl font-semibold">
-                {project.name}
-              </h3>
-              <span className="font-mono text-2xs text-muted tnum">
-                {project.year}
-              </span>
-            </div>
-            <p className="max-w-[46ch] text-sm leading-relaxed text-muted">
-              {project.blurb}
-            </p>
-            <p className="mt-4 max-w-[46ch] border-l-2 border-accent pl-3 text-sm leading-relaxed">
-              {project.note}
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <ul className="flex flex-wrap gap-1.5">
-              {project.tags.map((t) => (
-                <li
-                  key={t}
-                  className="rounded-xs border border-border px-2 py-0.5 font-mono text-2xs text-muted"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap items-center gap-2">
-              {project.live && (
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-sm bg-accent px-3 py-1.5 text-xs font-medium text-accent-contrast transition-opacity hover:opacity-90"
-                >
-                  Open live <ArrowUpRight size={13} />
-                </a>
-              )}
-              {project.source && (
-                <a
-                  href={project.source}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
-                >
-                  <Github size={13} /> Source
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <Media project={project} />
-      </div>
-    </article>
-  );
-}
-
-function Media({ project }: { project: Project }) {
-  if (project.media.kind === "embed") {
-    return <LiveEmbed src={project.media.src} label={project.media.label} />;
-  }
-  if (project.media.kind === "video") {
-    return <ScrubVideo src={project.media.src} name={project.name} />;
-  }
-  return (
-    <div className="relative min-h-[16rem] border-l border-border bg-surface-2">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, var(--border) 0 1px, transparent 1px 9px)",
-        }}
-      />
-      <p className="absolute bottom-4 left-4 font-mono text-2xs text-muted">
-        Client work — no public demo
-      </p>
-    </div>
-  );
-}
-
-/** Mounts the iframe only once the card is near the viewport. */
-function LiveEmbed({ src, label }: { src: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const [live, setLive] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setMounted(true),
-      { rootMargin: "300px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+function Row({
+  project,
+  fine,
+  onHover,
+  onOpen,
+}: {
+  project: Project;
+  fine: boolean;
+  onHover: () => void;
+  onOpen: (p: Project, el: HTMLButtonElement) => void;
+}) {
+  const isDemo = project.media.kind === "demo";
 
   return (
-    <div
-      ref={ref}
-      className="relative min-h-[18rem] border-t border-border bg-surface-2 lg:border-l lg:border-t-0"
+    <button
+      onPointerEnter={onHover}
+      onFocus={onHover}
+      onClick={(e) => onOpen(project, e.currentTarget)}
+      className="group flex w-full flex-col items-start gap-4 py-7 text-left transition-transform duration-300 hover:translate-x-1 sm:flex-row sm:gap-5"
     >
-      {mounted && (
-        <iframe
-          src={src}
-          title={label}
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-pointer-lock"
-          className="absolute inset-0 size-full"
-          style={{ pointerEvents: live ? "auto" : "none" }}
+      {/* No hover on touch, so the thumbnail comes inline. It sits above the
+          text on narrow screens, where a side by side split leaves the copy
+          squeezed into a column too narrow to read. */}
+      {!fine && project.media.kind !== "none" && (
+        <video
+          src={project.media.preview}
+          muted
+          loop
+          autoPlay
+          playsInline
+          // Full width only while stacked. In the row layout at sm and up,
+          // `w-full` plus `shrink-0` would push the text off screen.
+          className="aspect-[16/9] w-full shrink-0 rounded-sm object-cover sm:w-44"
         />
       )}
-      {!live && (
-        <button
-          onClick={() => setLive(true)}
-          className="absolute inset-0 grid place-items-center bg-bg/40 backdrop-blur-[1px] transition-colors hover:bg-bg/25"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-xs shadow-lg">
-            <Play size={12} className="text-accent" />
-            {label}
-          </span>
-        </button>
-      )}
-    </div>
-  );
-}
 
-/** Hover scrubs the clip by cursor position instead of autoplaying four loops. */
-function ScrubVideo({ src, name }: { src: string; name: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [ready, setReady] = useState(false);
-
-  const scrub = (e: React.PointerEvent<HTMLDivElement>) => {
-    const video = ref.current;
-    if (!video || !ready || !video.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const ratio = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
-    video.currentTime = ratio * video.duration;
-  };
-
-  return (
-    <div
-      onPointerMove={scrub}
-      className="group/media relative min-h-[14rem] cursor-ew-resize border-t border-border bg-surface-2 lg:border-l lg:border-t-0"
-    >
-      <video
-        ref={ref}
-        src={src}
-        muted
-        playsInline
-        preload="metadata"
-        onLoadedMetadata={() => setReady(true)}
-        aria-label={`${name} preview`}
-        className="absolute inset-0 size-full object-cover"
-      />
-      <span className="pointer-events-none absolute bottom-3 left-3 rounded-xs bg-bg/80 px-2 py-1 font-mono text-2xs text-muted opacity-0 backdrop-blur transition-opacity group-hover/media:opacity-100">
-        ← drag across to scrub →
+      <span className="hidden w-14 shrink-0 pt-1.5 text-sm text-muted tnum sm:block">
+        {project.year}
       </span>
-    </div>
-  );
-}
 
-function CompactRow({ project }: { project: Project }) {
-  const href = project.live ?? project.source;
-  const Wrapper = href ? "a" : "div";
-
-  return (
-    <li>
-      <Wrapper
-        {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
-        className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4 transition-colors hover:bg-surface"
-      >
-        <span className="font-mono text-2xs text-muted tnum">
-          {project.year}
+      <span className="flex-1">
+        <span className="flex flex-wrap items-center gap-2">
+          <span className="text-xl font-medium transition-colors group-hover:text-accent">
+            {project.name}
+          </span>
+          {isDemo && (
+            <span className="inline-flex items-center gap-1 rounded-xs bg-accent-soft px-1.5 py-0.5 text-xs font-medium text-accent">
+              <Play size={9} /> Runs here
+            </span>
+          )}
         </span>
-        <span className="font-display text-base font-medium transition-colors group-hover:text-accent">
-          {project.name}
-        </span>
-        <span className="min-w-[16ch] flex-1 text-sm text-muted">
+        <span className="mt-1.5 block max-w-[58ch] text-base leading-relaxed text-muted">
           {project.blurb}
         </span>
-        {href && (
-          <ArrowUpRight
-            size={14}
-            className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-          />
-        )}
-      </Wrapper>
-    </li>
+        <span className="mt-2.5 block text-sm text-muted">
+          {project.tags.join(" · ")}
+        </span>
+      </span>
+
+      <ArrowUpRight
+        size={17}
+        className="mt-1.5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+      />
+    </button>
   );
 }

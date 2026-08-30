@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
-import { EDUCATION, EXPERIENCE } from "@/content/experience";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { EXPERIENCE } from "@/content/experience";
 import { Section } from "@/components/ui/section";
+import { Reveal } from "@/components/ui/reveal";
+import { SITE } from "@/content/site";
 
 export function Experience() {
   const [open, setOpen] = useState<number | null>(0);
@@ -12,44 +14,54 @@ export function Experience() {
   return (
     <Section
       id="experience"
-      index="02"
-      label="Experience"
-      title="Mostly one problem, from several angles."
-      lede="How do you make a complicated document feel simple to edit? That question covers almost everything below."
+      variant="split"
+      title="Proof I show up."
+      lede="The teams that put up with me."
     >
       <ol className="border-t border-border">
         {EXPERIENCE.map((role, i) => {
           const isOpen = open === i;
+          const isAlai = role.company === SITE.previously.company;
+          const name = role.badge
+            ? `${role.company} (${role.badge})`
+            : role.company;
+
           return (
-            <li key={`${role.company}-${role.start}`} className="border-b border-border">
+            <Reveal
+              as="li"
+              key={`${role.company}-${role.start}`}
+              delay={i * 0.05}
+              className="border-b border-border"
+            >
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className="group flex w-full items-start gap-4 py-5 text-left sm:gap-6"
+                className="group flex w-full items-start gap-5 py-6 text-left"
               >
-                <span className="w-[7.5rem] shrink-0 pt-1 font-mono text-2xs text-muted tnum sm:w-[9rem]">
-                  {role.start} — {role.end}
-                </span>
-
                 <span className="flex-1">
-                  <span className="flex flex-wrap items-center gap-2">
-                    <span className="font-display text-lg font-semibold">
-                      {role.company}
-                    </span>
-                    {role.badge && (
-                      <span className="rounded-xs bg-accent-soft px-1.5 py-0.5 font-mono text-[10px] font-medium text-accent">
-                        {role.badge}
-                      </span>
-                    )}
+                  {/* The whole row toggles, so the company cannot be a link
+                      here: an anchor inside a button is invalid markup. Alai is
+                      linked in the summary below, and in the hero. */}
+                  <span
+                    className={`block text-xl font-semibold ${
+                      isAlai
+                        ? "text-accent"
+                        : "transition-colors group-hover:text-accent"
+                    }`}
+                  >
+                    {name}
                   </span>
-                  <span className="mt-0.5 block text-sm text-muted">
+                  <span className="mt-1 block text-base text-muted">
                     {role.title}
+                  </span>
+                  <span className="mt-1 block text-sm text-muted tnum">
+                    {role.start} to {role.end}
                   </span>
                 </span>
 
                 <ChevronDown
-                  size={16}
-                  className={`mt-1 shrink-0 text-muted transition-transform duration-300 group-hover:text-accent ${
+                  size={18}
+                  className={`mt-1.5 shrink-0 text-muted transition-transform duration-300 group-hover:text-accent ${
                     isOpen ? "rotate-180" : ""
                   }`}
                 />
@@ -64,56 +76,51 @@ export function Experience() {
                     transition={{ duration: 0.32, ease: [0.25, 1, 0.5, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="pb-8 sm:pl-[10.5rem]">
-                      <p className="mb-5 max-w-[60ch] text-sm leading-relaxed text-muted">
+                    <div className="max-w-[58ch] pb-9">
+                      <p className="mb-4 text-base leading-relaxed text-muted">
                         {role.summary}
                       </p>
-                      <ul className="mb-5 space-y-3">
+
+                      {/* A standalone link rather than the company name tacked
+                          onto the end of the summary, which read as a dangling
+                          fragment. */}
+                      {isAlai && (
+                        <a
+                          href={SITE.previously.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="link-draw mb-7 inline-flex items-center gap-1 text-base font-medium text-accent"
+                        >
+                          getalai.com
+                          <ArrowUpRight size={15} />
+                        </a>
+                      )}
+
+                      <ul className="mt-3 space-y-4">
                         {role.highlights.map((h) => (
                           <li key={h.text} className="flex gap-3">
-                            <span className="mt-[0.55rem] size-1 shrink-0 rounded-full bg-accent" />
-                            <span className="max-w-[62ch] text-sm leading-relaxed">
+                            <span className="mt-[0.7rem] size-1 shrink-0 rounded-full bg-accent" />
+                            <span className="text-base leading-relaxed">
                               {h.text}
                               {h.metric && (
-                                <span className="ml-2 inline-block rounded-xs border border-accent px-1.5 py-px font-mono text-2xs text-accent tnum">
-                                  {h.metric}
-                                </span>
+                                <span className="text-muted"> ({h.metric})</span>
                               )}
                             </span>
                           </li>
                         ))}
                       </ul>
-                      <ul className="flex flex-wrap gap-1.5">
-                        {role.stack.map((s) => (
-                          <li
-                            key={s}
-                            className="rounded-xs border border-border px-2 py-0.5 font-mono text-2xs text-muted"
-                          >
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
+
+                      <p className="mt-7 text-sm text-muted">
+                        {role.stack.join(" · ")}
+                      </p>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </li>
+            </Reveal>
           );
         })}
       </ol>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {EDUCATION.map((e) => (
-          <div
-            key={e.school}
-            className="rounded-md border border-border p-5"
-          >
-            <p className="font-display text-sm font-medium">{e.school}</p>
-            <p className="mt-1 text-sm text-muted">{e.credential}</p>
-            <p className="mt-3 font-mono text-2xs text-accent tnum">{e.result}</p>
-          </div>
-        ))}
-      </div>
     </Section>
   );
 }

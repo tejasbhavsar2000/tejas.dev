@@ -24,7 +24,7 @@
   --border: oklch(0.905 0.008 var(--accent-h));
   --border-strong: oklch(0.82 0.012 var(--accent-h));
   --text: oklch(0.22 0.012 var(--accent-h));
-  --text-muted: oklch(0.52 0.014 var(--accent-h));
+  --text-muted: oklch(0.455 0.014 var(--accent-h));
   --accent: oklch(0.6 var(--accent-c) var(--accent-h));
   --accent-hover: oklch(0.54 var(--accent-c) var(--accent-h));
   --accent-soft: oklch(0.6 var(--accent-c) var(--accent-h) / 0.12);
@@ -39,7 +39,7 @@
   --border: oklch(0.295 0.016 var(--accent-h));
   --border-strong: oklch(0.4 0.02 var(--accent-h));
   --text: oklch(0.965 0.005 var(--accent-h));
-  --text-muted: oklch(0.68 0.014 var(--accent-h));
+  --text-muted: oklch(0.745 0.014 var(--accent-h));
   --accent: oklch(0.76 var(--accent-c) var(--accent-h));
   --accent-hover: oklch(0.83 var(--accent-c) var(--accent-h));
   --accent-soft: oklch(0.76 var(--accent-c) var(--accent-h) / 0.16);
@@ -74,11 +74,11 @@
   --radius-lg: calc(var(--radius-base) * 1.5);
   --radius-xl: calc(var(--radius-base) * 2.2);
 
-  /* Fluid type scale */
-  --text-2xs: 0.6875rem;
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
+  /* Fluid type scale. The floor is 13px: anything smaller stopped being
+     readable and became decoration. */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
   --text-lg: clamp(1.0625rem, 0.4vw + 0.98rem, 1.1875rem);
   --text-xl: clamp(1.25rem, 0.7vw + 1.1rem, 1.5rem);
   --text-2xl: clamp(1.5rem, 1.4vw + 1.2rem, 2rem);
@@ -112,6 +112,8 @@
     background-color: var(--bg);
     color: var(--text);
     font-family: var(--font-body-active);
+    font-size: var(--text-base);
+    line-height: 1.6;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
@@ -149,6 +151,22 @@
     transition-duration: calc(var(--motion) * 300ms);
     transition-timing-function: var(--ease-out-quart);
   }
+
+  /* An underline that draws in from the left, rather than a border that
+     simply appears. background-size animates; border-bottom does not. */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    padding-bottom: 1px;
+    transition: background-size calc(var(--motion) * 320ms)
+      var(--ease-out-quart);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1.5px;
+  }
 }
 
 :root[data-motion="none"] *,
@@ -166,31 +184,6 @@
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* ---------------------------------------------------------------------------
-   Grid overlay — a dock toggle that exposes the layout grid over the page.
-   --------------------------------------------------------------------------- */
-:root[data-grid="on"] body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      var(--accent-soft) 0 1px,
-      transparent 1px calc(100% / 12)
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--border) 60%, transparent) 0 1px,
-      transparent 1px 6rem
-    );
-  background-size: min(72rem, 100% - 3rem) 100%, 100% 100%;
-  background-position: center top;
-  background-repeat: no-repeat, repeat;
 }
 
 /* View Transitions: the theme swap wipes from the toggle's position. */

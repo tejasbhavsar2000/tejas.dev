@@ -47,8 +47,8 @@ function Box({
       className="rounded-sm border border-border p-2"
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-2xs">{name}</span>
-        <span className="font-mono text-[10px] text-muted tnum">
+        <span className="font-mono text-xs">{name}</span>
+        <span className="text-xs text-muted tnum">
           {renders} {renders === 1 ? "render" : "renders"}
         </span>
       </div>
@@ -71,9 +71,9 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         placeholder="type a pokémon…"
         aria-label="Pokemon name"
-        className="w-full rounded-xs border border-border bg-bg px-2 py-1 font-mono text-2xs outline-none focus:border-accent"
+        className="w-full rounded-xs border border-border bg-bg px-2 py-1 font-mono text-xs outline-none focus:border-accent"
       />
-      <p className="font-mono text-[10px] text-muted">
+      <p className="text-xs text-muted">
         {value ? `${value} is my favourite` : "enter a pokémon"}
       </p>
     </div>
@@ -120,12 +120,12 @@ export function ColocationDemo() {
   return (
     <figure className="my-8 overflow-hidden rounded-lg border border-border bg-surface">
       <div className="flex items-center justify-between gap-4 border-b border-border px-4 py-2.5">
-        <p className="font-mono text-2xs uppercase tracking-wider text-muted">
+        <p className="text-xs text-muted">
           Type in either input
         </p>
         <button
           onClick={() => setNonce((n) => n + 1)}
-          className="rounded-xs px-2 py-1 font-mono text-2xs text-muted transition-colors hover:bg-surface-2 hover:text-text"
+          className="rounded-xs px-2 py-1 text-xs text-muted transition-colors hover:bg-surface-2 hover:text-text"
         >
           Reset counts
         </button>
@@ -133,13 +133,13 @@ export function ColocationDemo() {
 
       <div key={nonce} className="grid gap-px bg-border sm:grid-cols-2">
         <div className="bg-bg p-4">
-          <p className="mb-3 font-mono text-2xs text-muted">
+          <p className="mb-3 text-xs text-muted">
             State in <span className="text-accent">App</span>
           </p>
           <LiftedTree />
         </div>
         <div className="bg-bg p-4">
-          <p className="mb-3 font-mono text-2xs text-muted">
+          <p className="mb-3 text-xs text-muted">
             State in <span className="text-accent">PokemonName</span>
           </p>
           <ColocatedTree />
@@ -148,7 +148,7 @@ export function ColocationDemo() {
 
       <figcaption className="border-t border-border px-4 py-3 text-xs leading-relaxed text-muted">
         On the left, every keystroke re-renders App, Sidebar and Footer too. On
-        the right, only the component that owns the state re-renders — the
+        the right, only the component that owns the state re-renders. The
         counters on its siblings never move.
       </figcaption>
     </figure>

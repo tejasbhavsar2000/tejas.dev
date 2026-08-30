@@ -8,7 +8,7 @@ tags: ["React", "Performance"]
 State colocation is a simple habit: declare a piece of state as close as possible
 to the component that actually uses it.
 
-It sounds like a style preference. It isn't — it decides how much of your tree
+It sounds like a style preference. It isn't. It decides how much of your tree
 React has to re-render on every keystroke.
 
 ## When state lives far from where it's used
@@ -38,7 +38,7 @@ function App() {
 ```
 
 Every character typed calls `setPokemon`, which re-renders `App`. And when `App`
-re-renders, so does everything it returns — including siblings that have nothing
+re-renders, so does everything it returns, including siblings that have nothing
 to do with the input at all.
 
 On a small tree you'll never notice. On a real one, you'll notice.

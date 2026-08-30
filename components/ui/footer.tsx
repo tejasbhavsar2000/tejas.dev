@@ -2,14 +2,13 @@ import { SITE } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border py-8">
-      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-2xs text-muted">
+    <footer className="border-t border-border py-10">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <p>
           © {new Date().getFullYear()} {SITE.name}
         </p>
         <p>
-          Built with Next.js and a theme system you can{" "}
-          <span className="text-accent">edit yourself</span> — bottom right.
+          Built with Next.js. The theme is yours to change, bottom right.
         </p>
       </div>
     </footer>

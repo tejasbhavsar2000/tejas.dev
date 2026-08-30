@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "motion/react";
 import {
   Check,
   Dices,
-  Grid3x3,
   Link2,
   Moon,
   RotateCcw,
@@ -55,7 +54,7 @@ export function ThemeDock() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      /* clipboard can be blocked — the toggle just won't confirm */
+      /* clipboard can be blocked, so the toggle just won't confirm */
     }
   };
 
@@ -87,7 +86,7 @@ export function ThemeDock() {
                 <p className="font-display text-sm font-semibold">
                   Theme builder
                 </p>
-                <p className="text-2xs text-muted">
+                <p className="text-xs text-muted">
                   Every control writes one CSS variable.
                 </p>
               </div>
@@ -182,21 +181,6 @@ export function ThemeDock() {
                   onChange={(v) => set("motion", v)}
                 />
               </Row>
-
-              <Row label="Layout grid">
-                <button
-                  onClick={() => set("grid", !theme.grid)}
-                  aria-pressed={theme.grid}
-                  className={`flex items-center gap-2 rounded-sm border px-2.5 py-1.5 text-xs transition-colors ${
-                    theme.grid
-                      ? "border-accent bg-accent-soft text-accent"
-                      : "border-border text-muted hover:border-border-strong"
-                  }`}
-                >
-                  <Grid3x3 size={13} />
-                  {theme.grid ? "Visible" : "Hidden"}
-                </button>
-              </Row>
             </div>
 
             <footer className="flex items-center gap-1.5 border-t border-border px-4 py-3">
@@ -255,7 +239,7 @@ function Row({
 }) {
   return (
     <div className="space-y-1.5">
-      <p className="font-mono text-2xs uppercase tracking-wider text-muted">
+      <p className="text-xs font-medium text-muted">
         {label}
       </p>
       {children}

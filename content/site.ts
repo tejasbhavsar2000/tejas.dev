@@ -1,15 +1,18 @@
 export const SITE = {
   name: "Tejas Bhavsar",
-  role: "Design Engineer",
+  role: "Software Engineer",
   url: "https://tejas.dev",
   email: "tejasb.dev@gmail.com",
   twitterHandle: "@_tejas_bhavsar",
   description:
-    "Design engineer building direct-manipulation interfaces — editors, canvases, and the rendering runtimes underneath them.",
-  // The one line the whole site is arguing for.
-  tagline: "I build interfaces you can grab.",
-  intro:
-    "Editors, canvases, and the rendering runtimes underneath them. Most recently on the founding engineering team at Alai (YC W24), where I replaced a canvas renderer with a DOM-first architecture and made editing a slide feel like editing a document.",
+    "Software engineer with a frontend lean, building for the web. Previously @ Alai (YC W24).",
+  // The frontend lean is carried by the sentence, never by the job title.
+  intro: "I build for the web, mostly the parts people see and touch.",
+  previously: {
+    company: "Alai",
+    badge: "YC W24",
+    href: "https://getalai.com/",
+  },
   links: {
     github: "https://github.com/tejasbhavsar2000",
     twitter: "https://twitter.com/_tejas_bhavsar",
@@ -21,11 +24,15 @@ export const SITE = {
   },
 } as const;
 
+/**
+ * The default order. Visitors can reorder these, so nothing may assume the
+ * positions here are final: numerals and navigation derive from live state.
+ */
 export const SECTIONS = [
-  { id: "top", label: "Top" },
-  { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
-  { id: "stack", label: "Stack" },
+  { id: "work", label: "Projects" },
   { id: "writing", label: "Writing" },
   { id: "contact", label: "Contact" },
 ] as const;
+
+export type SectionId = (typeof SECTIONS)[number]["id"];

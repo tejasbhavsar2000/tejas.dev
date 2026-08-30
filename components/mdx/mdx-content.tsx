@@ -16,10 +16,11 @@ const components = {
     <h3 {...props} className="mt-10 scroll-mt-24 text-lg font-semibold" />
   ),
   p: (props: React.ComponentProps<"p">) => (
-    <p {...props} className="mt-5 leading-[1.75] text-muted" />
+    // Prose is body text, so it gets full contrast. `text-muted` is metadata.
+    <p {...props} className="mt-5 max-w-[68ch] leading-[1.75]" />
   ),
   ul: (props: React.ComponentProps<"ul">) => (
-    <ul {...props} className="mt-5 list-disc space-y-2 pl-5 text-muted" />
+    <ul {...props} className="mt-5 max-w-[68ch] list-disc space-y-2 pl-5" />
   ),
   a: (props: React.ComponentProps<"a">) => (
     <a
