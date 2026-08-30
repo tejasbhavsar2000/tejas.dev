@@ -1,0 +1,87 @@
+---
+title: "State colocation, and why your App component keeps re-rendering"
+description: "Moving state down the tree is the cheapest React performance fix there is. Here's the same component written both ways, side by side."
+date: "2021-07-10"
+tags: ["React", "Performance"]
+---
+
+State colocation is a simple habit: declare a piece of state as close as possible
+to the component that actually uses it.
+
+It sounds like a style preference. It isn't — it decides how much of your tree
+React has to re-render on every keystroke.
+
+## When state lives far from where it's used
+
+Here's a component that takes its value and its setter as props, with the state
+declared a level up in `App`:
+
+```jsx
+function PokemonName({ pokemon, onChange }) {
+  return (
+    <div>
+      <label htmlFor="pokemon">Pokemon name</label>
+      <input
+        id="pokemon"
+        value={pokemon}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <p>{pokemon ? `${pokemon} is my favourite` : "enter a pokemon"}</p>
+    </div>
+  );
+}
+
+function App() {
+  const [pokemon, setPokemon] = useState("");
+  return <PokemonName pokemon={pokemon} onChange={setPokemon} />;
+}
+```
+
+Every character typed calls `setPokemon`, which re-renders `App`. And when `App`
+re-renders, so does everything it returns — including siblings that have nothing
+to do with the input at all.
+
+On a small tree you'll never notice. On a real one, you'll notice.
+
+## When state is colocated
+
+The fix is to move the state into the only component that reads it:
+
+```jsx
+function PokemonName() {
+  const [pokemon, setPokemon] = useState("");
+  return (
+    <div>
+      <label htmlFor="pokemon">Pokemon name</label>
+      <input
+        id="pokemon"
+        value={pokemon}
+        onChange={(e) => setPokemon(e.target.value)}
+      />
+      <p>{pokemon ? `${pokemon} is my favourite` : "enter a pokemon"}</p>
+    </div>
+  );
+}
+
+function App() {
+  return <PokemonName />;
+}
+```
+
+`App` no longer owns the state, so `App` no longer re-renders. Nor do its other
+children. The re-render is contained to the component that changed.
+
+## See it happen
+
+Both trees below are live. Every box flashes and counts up when it re-renders,
+so you can watch the difference rather than take my word for it:
+
+<ColocationDemo />
+
+## Wrapping up
+
+Before you reach for `memo`, `useMemo`, or a state library, check where the state
+is declared. Moving it down the tree costs nothing, deletes props, and usually
+removes the need for the memoisation you were about to add.
+
+Push state down. Lift it only when a second component genuinely needs it.
