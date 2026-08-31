@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <main id="main" className="relative z-10">
         <Container>
           <div id="top" className="scroll-mt-24">
             <Hero />

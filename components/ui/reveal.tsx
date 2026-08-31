@@ -30,18 +30,17 @@ export function Reveal({
   const reduced = useReducedMotion();
   const enabled = theme.motion !== "none" && !reduced;
 
-  if (!enabled) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
   const Motion = as === "li" ? motion.li : motion.div;
 
+  // The element type must not depend on `enabled`. The theme resolves after the
+  // first render, so swapping between `motion.div` and a plain `div` remounts
+  // the entire subtree: state resets, and any observer watching a child is left
+  // holding a detached node. Disabling the animation keeps the tree stable.
   return (
     <Motion
       className={className}
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={enabled ? { opacity: 0, y: 14 } : false}
+      whileInView={enabled ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, margin: "0px 0px -12% 0px" }}
       transition={{ duration: 0.5, delay, ease: [0.25, 1, 0.5, 1] }}
     >

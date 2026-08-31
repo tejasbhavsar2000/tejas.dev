@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   AnimatePresence,
   motion,
@@ -12,6 +13,11 @@ import { PROJECTS, Project } from "@/content/projects";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { DemoDialog } from "@/components/ui/demo-dialog";
+import {
+  SortableList,
+  SortableItem,
+  useSortable,
+} from "@/components/ui/sortable";
 
 /** Demos want a keyboard and a mouse, and previews want hover. */
 function useFinePointer() {
@@ -26,8 +32,17 @@ function useFinePointer() {
   return fine;
 }
 
+const PROJECT_IDS = PROJECTS.map((p) => p.slug);
+
+/** Matches the preview's `w-[20rem]` and its 16/10 aspect. */
+const PREVIEW_W = 320;
+const PREVIEW_H = 200;
+const EDGE = 12;
+
 export function Work() {
   const fine = useFinePointer();
+  const { order, setOrder, move, enabled } = useSortable(PROJECT_IDS);
+  const bySlug = new Map(PROJECTS.map((p) => [p.slug, p]));
   const [hovered, setHovered] = useState<Project | null>(null);
   const [openProject, setOpenProject] = useState<Project | null>(null);
   const lastTrigger = useRef<HTMLButtonElement | null>(null);
@@ -42,8 +57,17 @@ export function Work() {
   useEffect(() => {
     if (!fine || !hovered) return;
     const onMove = (e: PointerEvent) => {
-      x.set(e.clientX + 24);
-      y.set(e.clientY - 90);
+      // Flip to the other side of the cursor rather than run off the right
+      // edge, and keep it inside the window vertically.
+      const toRight = e.clientX + 24;
+      const fitsRight = toRight + PREVIEW_W <= window.innerWidth - EDGE;
+      x.set(fitsRight ? toRight : e.clientX - 24 - PREVIEW_W);
+      y.set(
+        Math.min(
+          Math.max(EDGE, e.clientY - 90),
+          window.innerHeight - PREVIEW_H - EDGE,
+        ),
+      );
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
@@ -67,47 +91,69 @@ export function Work() {
       title="Made for fun."
       lede="Some of them even work."
     >
-      <ul
-        onPointerLeave={() => setHovered(null)}
-        className="divide-y divide-border border-y border-border"
-      >
-        {PROJECTS.map((project, i) => (
-          <Reveal as="li" key={project.slug} delay={i * 0.05}>
-            <Row
-              project={project}
-              fine={fine}
-              onHover={() => fine && setHovered(project)}
-              onOpen={open}
-            />
-          </Reveal>
-        ))}
-      </ul>
+      <div onPointerLeave={() => setHovered(null)}>
+        <SortableList
+          order={order}
+          onReorder={setOrder}
+          move={move}
+          enabled={enabled}
+          labelOf={(id) => bySlug.get(id)?.name ?? id}
+          className="divide-y divide-border border-y border-border"
+        >
+          {order.map((slug, i) => {
+            const project = bySlug.get(slug);
+            if (!project) return null;
+            return (
+              <SortableItem key={slug} id={slug}>
+                <Reveal delay={i * 0.05}>
+                  <Row
+                    project={project}
+                    fine={fine}
+                    onHover={() => fine && setHovered(project)}
+                    onOpen={open}
+                  />
+                </Reveal>
+              </SortableItem>
+            );
+          })}
+        </SortableList>
+      </div>
 
-      {/* One shared preview that follows the cursor, rather than one per row. */}
-      {fine && (
-        <AnimatePresence>
-          {hovered && hovered.media.kind !== "none" && (
-            <motion.div
-              key={hovered.slug}
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.18, ease: [0.25, 1, 0.5, 1] }}
-              style={{ x: px, y: py }}
-              className="pointer-events-none fixed left-0 top-0 z-40 w-[20rem] overflow-hidden rounded-md border border-border bg-surface shadow-2xl"
-            >
-              <video
-                src={hovered.media.preview}
-                muted
-                loop
-                autoPlay
-                playsInline
-                className="aspect-[16/10] w-full object-cover"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+      {/*
+        One shared preview that follows the cursor, rather than one per row.
+
+        Portalled to the body on purpose. A `backdrop-filter` ancestor, which the
+        translucent band is, establishes a containing block for fixed position
+        descendants, so rendering this in place made it scroll with the band
+        instead of staying with the cursor. A portal also keeps it safe from any
+        ancestor later gaining a transform, filter or contain.
+      */}
+      {fine &&
+        createPortal(
+          <AnimatePresence>
+            {hovered && hovered.media.kind !== "none" && (
+              <motion.div
+                key={hovered.slug}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.18, ease: [0.25, 1, 0.5, 1] }}
+                style={{ x: px, y: py }}
+                className="pointer-events-none fixed left-0 top-0 z-40 w-[20rem] overflow-hidden rounded-md border border-border bg-surface shadow-2xl"
+              >
+                <video
+                  src={hovered.media.preview}
+                  muted
+                  loop
+                  autoPlay
+                  playsInline
+                  className="aspect-[16/10] w-full object-cover"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
 
       {openProject && (
         <DemoDialog

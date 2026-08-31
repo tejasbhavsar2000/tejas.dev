@@ -88,9 +88,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setTheme(next);
     });
 
-    // A skipped transition is normal, for instance two quick clicks or a hidden
-    // tab, and it rejects `finished`. Handle both outcomes so the rejection is
-    // never left unhandled: `.finally()` re-throws it and surfaces an AbortError.
+    // A skipped transition is normal: two quick clicks, or the tab being
+    // hidden. Of the three promises a ViewTransition exposes, `ready` is the
+    // one that rejects on a skip, with an AbortError. `finished` and
+    // `updateCallbackDone` both resolve. Leaving `ready` untouched means that
+    // rejection is unhandled, which is what surfaces as a runtime error.
+    transition.ready.catch(() => {});
+
     const cleanup = () => {
       delete root.dataset.wipe;
     };

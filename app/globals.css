@@ -29,7 +29,6 @@
   --accent-hover: oklch(0.54 var(--accent-c) var(--accent-h));
   --accent-soft: oklch(0.6 var(--accent-c) var(--accent-h) / 0.12);
   --accent-contrast: oklch(0.99 0.005 var(--accent-h));
-  --shadow-color: 0deg 0% 45%;
 }
 
 :root[data-mode="dark"] {
@@ -44,7 +43,6 @@
   --accent-hover: oklch(0.83 var(--accent-c) var(--accent-h));
   --accent-soft: oklch(0.76 var(--accent-c) var(--accent-h) / 0.16);
   --accent-contrast: oklch(0.16 0.02 var(--accent-h));
-  --shadow-color: 0deg 0% 2%;
 }
 
 /* ---------------------------------------------------------------------------
@@ -72,7 +70,6 @@
   --radius-sm: calc(var(--radius-base) * 0.67);
   --radius-md: var(--radius-base);
   --radius-lg: calc(var(--radius-base) * 1.5);
-  --radius-xl: calc(var(--radius-base) * 2.2);
 
   /* Fluid type scale. The floor is 13px: anything smaller stopped being
      readable and became decoration. */
@@ -84,10 +81,8 @@
   --text-2xl: clamp(1.5rem, 1.4vw + 1.2rem, 2rem);
   --text-3xl: clamp(1.875rem, 2.4vw + 1.35rem, 2.75rem);
   --text-4xl: clamp(2.25rem, 4vw + 1.4rem, 4rem);
-  --text-5xl: clamp(2.75rem, 6.5vw + 1.3rem, 6rem);
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ---------------------------------------------------------------------------
@@ -143,15 +138,9 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Motion. `--motion` is a 0..1 intensity the dock sets; 0 disables transitions
-   without needing every component to branch on it.
+   Utilities
    --------------------------------------------------------------------------- */
 @layer utilities {
-  .motion-safe-t {
-    transition-duration: calc(var(--motion) * 300ms);
-    transition-timing-function: var(--ease-out-quart);
-  }
-
   /* An underline that draws in from the left, rather than a border that
      simply appears. background-size animates; border-bottom does not. */
   .link-draw {
@@ -202,11 +191,6 @@
 
 :root[data-wipe="active"]::view-transition-new(root) {
   animation: theme-wipe 620ms var(--ease-out-quart);
-}
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
 }
 
 /* ---------------------------------------------------------------------------

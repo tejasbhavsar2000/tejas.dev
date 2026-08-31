@@ -34,7 +34,7 @@ export default async function PostPage({
   if (!post) notFound();
 
   return (
-    <main id="main">
+    <main id="main" className="relative z-10">
       <Container className="max-w-[46rem]">
         <div className="py-10">
           <Link

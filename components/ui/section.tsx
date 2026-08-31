@@ -71,5 +71,9 @@ export function Section({
 
   if (variant !== "band") return centred;
 
-  return <div className="bg-surface">{centred}</div>;
+  // Translucent rather than opaque, so the terrain behind the page shows
+  // through. The sticky header already uses this treatment.
+  return (
+    <div className="bg-surface/70 backdrop-blur-sm">{centred}</div>
+  );
 }

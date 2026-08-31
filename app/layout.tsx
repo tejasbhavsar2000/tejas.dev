@@ -8,6 +8,7 @@ import {
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeDock } from "@/components/theme/theme-dock";
 import { ScrollProvider } from "@/components/layout/scroll-provider";
+import { Backdrop } from "@/components/canvas/backdrop";
 import { themeInitScript } from "@/lib/theme-script";
 import { SITE } from "@/content/site";
 import "./globals.css";
@@ -53,10 +54,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#191716" },
-  ],
+  // One value, kept in sync by `applyTheme` when the mode changes. A media
+  // query pair would follow the OS, which the page no longer does.
+  themeColor: "#fbfaf9",
 };
 
 export default function RootLayout({
@@ -77,6 +77,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
             <ScrollProvider>
+              <Backdrop />
               <a
                 href="#main"
                 className="sr-only rounded-sm bg-accent px-4 py-2 text-accent-contrast focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000]"

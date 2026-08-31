@@ -16,6 +16,16 @@ import { useTheme } from "@/components/theme/theme-provider";
 import {
   ACCENTS,
   AccentId,
+  CURSORS,
+  CursorId,
+  FLOWS,
+  FlowId,
+  GRIDS,
+  GridId,
+  SHOWS,
+  ShowId,
+  TERRAINS,
+  TerrainId,
   DENSITIES,
   DensityId,
   FONTS,
@@ -179,6 +189,63 @@ export function ThemeDock() {
                   }))}
                   value={theme.motion}
                   onChange={(v) => set("motion", v)}
+                />
+              </Row>
+
+              <p className="pt-2 text-xs font-medium text-muted">Background</p>
+
+              <Row label="Show">
+                <Segmented
+                  options={(Object.keys(SHOWS) as ShowId[]).map((id) => ({
+                    id,
+                    label: SHOWS[id].label,
+                  }))}
+                  value={theme.show}
+                  onChange={(v) => set("show", v)}
+                />
+              </Row>
+
+              <Row label="Terrain">
+                <Segmented
+                  options={(Object.keys(TERRAINS) as TerrainId[]).map((id) => ({
+                    id,
+                    label: TERRAINS[id].label,
+                  }))}
+                  value={theme.terrain}
+                  onChange={(v) => set("terrain", v)}
+                />
+              </Row>
+
+              <Row label="Flow">
+                <Segmented
+                  options={(Object.keys(FLOWS) as FlowId[]).map((id) => ({
+                    id,
+                    label: FLOWS[id].label,
+                  }))}
+                  value={theme.flow}
+                  onChange={(v) => set("flow", v)}
+                />
+              </Row>
+
+              <Row label="Grid">
+                <Segmented
+                  options={(Object.keys(GRIDS) as GridId[]).map((id) => ({
+                    id,
+                    label: GRIDS[id].label,
+                  }))}
+                  value={theme.grid}
+                  onChange={(v) => set("grid", v)}
+                />
+              </Row>
+
+              <Row label="Cursor">
+                <Segmented
+                  options={(Object.keys(CURSORS) as CursorId[]).map((id) => ({
+                    id,
+                    label: CURSORS[id].label,
+                  }))}
+                  value={theme.cursor}
+                  onChange={(v) => set("cursor", v)}
                 />
               </Row>
             </div>

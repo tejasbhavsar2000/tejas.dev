@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Tejas Bhavsar",
   role: "Software Engineer",
-  url: "https://tejas.dev",
+  url: "https://tejas-dev.vercel.app",
   email: "tejasb.dev@gmail.com",
   twitterHandle: "@_tejas_bhavsar",
   description:
@@ -25,8 +25,8 @@ export const SITE = {
 } as const;
 
 /**
- * The default order. Visitors can reorder these, so nothing may assume the
- * positions here are final: numerals and navigation derive from live state.
+ * Source of truth for section order. Section numerals and the header nav both
+ * derive from position here, so adding one renumbers the rest automatically.
  */
 export const SECTIONS = [
   { id: "experience", label: "Experience" },
