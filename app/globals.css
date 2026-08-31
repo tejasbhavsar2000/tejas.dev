@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+/* Dark is a data attribute, not a media query, so the dock can drive it. */
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Runtime tokens. Everything the theme dock mutates lives here as a plain CSS
+   variable, so a change is one property write and the whole page follows.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Accent is a hue + chroma pair so every tint derives from two numbers. */
+  --accent-h: 45;
+  --accent-c: 0.15;
+
+  /* Dock-controlled scalars */
+  --radius-base: 0.75rem;
+  --spacing: 0.25rem;
+  --motion: 1;
+
+  /* Light palette (the default; dark overrides below) */
+  --bg: oklch(0.985 0.003 var(--accent-h));
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.965 0.006 var(--accent-h));
+  --border: oklch(0.905 0.008 var(--accent-h));
+  --border-strong: oklch(0.82 0.012 var(--accent-h));
+  --text: oklch(0.22 0.012 var(--accent-h));
+  --text-muted: oklch(0.455 0.014 var(--accent-h));
+  --accent: oklch(0.6 var(--accent-c) var(--accent-h));
+  --accent-hover: oklch(0.54 var(--accent-c) var(--accent-h));
+  --accent-soft: oklch(0.6 var(--accent-c) var(--accent-h) / 0.12);
+  --accent-contrast: oklch(0.99 0.005 var(--accent-h));
+}
+
+:root[data-mode="dark"] {
+  --bg: oklch(0.155 0.008 var(--accent-h));
+  --surface: oklch(0.195 0.011 var(--accent-h));
+  --surface-2: oklch(0.235 0.014 var(--accent-h));
+  --border: oklch(0.295 0.016 var(--accent-h));
+  --border-strong: oklch(0.4 0.02 var(--accent-h));
+  --text: oklch(0.965 0.005 var(--accent-h));
+  --text-muted: oklch(0.745 0.014 var(--accent-h));
+  --accent: oklch(0.76 var(--accent-c) var(--accent-h));
+  --accent-hover: oklch(0.83 var(--accent-c) var(--accent-h));
+  --accent-soft: oklch(0.76 var(--accent-c) var(--accent-h) / 0.16);
+  --accent-contrast: oklch(0.16 0.02 var(--accent-h));
+}
+
+/* ---------------------------------------------------------------------------
+   Tailwind theme. `inline` keeps the var reference intact instead of copying
+   the value, which is what makes the tokens live-switchable at runtime.
+   --------------------------------------------------------------------------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --font-display: var(--font-display-active);
+  --font-sans: var(--font-body-active);
+  --font-mono: var(--font-mono-active);
+
+  --radius-xs: calc(var(--radius-base) * 0.34);
+  --radius-sm: calc(var(--radius-base) * 0.67);
+  --radius-md: var(--radius-base);
+  --radius-lg: calc(var(--radius-base) * 1.5);
+
+  /* Fluid type scale. The floor is 13px: anything smaller stopped being
+     readable and became decoration. */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: clamp(1.0625rem, 0.4vw + 0.98rem, 1.1875rem);
+  --text-xl: clamp(1.25rem, 0.7vw + 1.1rem, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.4vw + 1.2rem, 2rem);
+  --text-3xl: clamp(1.875rem, 2.4vw + 1.35rem, 2.75rem);
+  --text-4xl: clamp(2.25rem, 4vw + 1.4rem, 4rem);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body-active);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display-active);
+    text-wrap: balance;
+    letter-spacing: -0.022em;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Tabular numerals wherever numbers need to line up */
+  .tnum { font-variant-numeric: tabular-nums; }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+@layer utilities {
+  /* An underline that draws in from the left, rather than a border that
+     simply appears. background-size animates; border-bottom does not. */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    padding-bottom: 1px;
+    transition: background-size calc(var(--motion) * 320ms)
+      var(--ease-out-quart);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1.5px;
+  }
+}
+
+:root[data-motion="none"] *,
+:root[data-motion="none"] *::before,
+:root[data-motion="none"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* View Transitions: the theme swap wipes from the toggle's position. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+@keyframes theme-wipe {
+  from { clip-path: circle(0% at var(--wipe-x, 50%) var(--wipe-y, 50%)); }
+  to   { clip-path: circle(150% at var(--wipe-x, 50%) var(--wipe-y, 50%)); }
+}
+
+:root[data-wipe="active"]::view-transition-new(root) {
+  animation: theme-wipe 620ms var(--ease-out-quart);
+}
+
+/* ---------------------------------------------------------------------------
+   MDX prose + Shiki code blocks. rehype-pretty-code emits both themes and we
+   pick one with the same data-mode attribute the rest of the site uses.
+   --------------------------------------------------------------------------- */
+.mdx figure[data-rehype-pretty-code-figure] {
+  margin: 1.75rem 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-base);
+  background: var(--surface);
+}
+
+.mdx figure[data-rehype-pretty-code-figure] pre {
+  overflow-x: auto;
+  padding: 1rem 1.15rem;
+  font-family: var(--font-mono-active);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.mdx code[data-line-numbers] { counter-reset: line; }
+
+.mdx :not(pre) > code {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-base) * 0.34);
+  background: var(--surface-2);
+  padding: 0.1em 0.36em;
+  font-family: var(--font-mono-active);
+  font-size: 0.875em;
+  color: var(--text);
+}
+
+/* Shiki dual-theme swap */
+:root[data-mode="light"] .mdx pre code span { color: var(--shiki-light); }
+:root[data-mode="dark"] .mdx pre code span { color: var(--shiki-dark); }
